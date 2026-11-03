@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Calculus I Notes Drill</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Reem+Kufi:wght@500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<script>
+window.MathJax = { tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}, svg:{fontCache:'global'}, options:{enableMenu:false} };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+/* Layout: dark graph-paper notebook — sticky tab bar, one centered column of working cards. Single dark look by design. */
+:root{
+  --paper:#0B0F14; --grid:#151C25; --card:#121922; --card2:#18212C; --ink:#E6EDF3; --muted:#8E9BAA; --line:#253140;
+  --accent:#8FA7FF; --accent-soft:#1C2744; --accent-ink:#0B0F14;
+  --hl:#5C4C10; --hl-ink:#FFF3C2; --warn:#F5C451;
+  --ok:#52C892; --ok-soft:#10261C; --bad:#F27B7B; --bad-soft:#2C1616;
+  --f-display:"Reem Kufi","IBM Plex Sans",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:12px; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+mjx-container{display:inline-block}
+mjx-container svg{max-width:100%}
+mjx-container[display="true"]{display:block;margin:.4em 0;overflow-x:auto;overflow-y:hidden;max-width:100%}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.25;margin:0;font-weight:700}
+h2{font-size:1.6rem} h3{font-size:1.12rem}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mark{background:linear-gradient(transparent 55%,var(--hl) 55%);padding:0 .15em}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
+.brand h1{font-size:1.3rem}
+.brand h1 small{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);font-weight:500;margin-left:6px}
+.overall{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--grid);border-radius:99px;overflow:hidden;width:90px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:8px}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:99px;font-size:.9rem;font-weight:500;white-space:nowrap}
+nav.tabs a:hover{color:var(--ink);background:var(--grid)}
+nav.tabs a.on{background:var(--accent);color:var(--accent-ink)}
+nav.tabs .cnt{font-family:var(--f-mono);font-size:.75rem;margin-left:4px}
+main{padding-block:24px 64px;display:grid;gap:20px}
+.view{display:grid;gap:18px}
+.lede{color:var(--muted);max-width:64ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--card);padding:9px 16px;border-radius:10px;font-weight:600;font-size:.94rem}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:5px 11px;font-size:.84rem}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:.76rem;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.chip.tf{background:var(--hl);color:var(--hl-ink)}
+.chip.lv1{background:var(--ok-soft);color:var(--ok)} .chip.lv2{background:var(--hl);color:var(--hl-ink)} .chip.lv3{background:var(--bad-soft);color:var(--bad)}
+.chip.fix{background:#3A2A08;color:var(--warn)}
+.muted{color:var(--muted)} .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.hero{display:grid;gap:10px;padding-block:6px}
+.hero h2{font-size:clamp(1.6rem,4.5vw,2.3rem)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.stat b{display:block;font-family:var(--f-mono);font-size:1.5rem;font-weight:500}
+.stat span{font-size:.85rem;color:var(--muted)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.topic{display:grid;gap:8px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;transition:border-color .15s,transform .15s}
+.topic:hover{border-color:var(--accent);transform:translateY(-2px)}
+.topic .sec{font-family:var(--f-mono);font-size:.75rem;color:var(--accent)}
+.topic p{font-size:.85rem;color:var(--muted);line-height:1.55}
+.topic .meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem;color:var(--muted)}
+.topic .bar{width:100%}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.mode{display:grid;gap:4px;text-align:left;padding:14px;border-radius:var(--r);border:1px dashed var(--line);background:transparent}
+.mode:hover{border-style:solid;border-color:var(--accent);background:var(--card)}
+.mode b{font-size:1rem} .mode span{font-size:.84rem;color:var(--muted);line-height:1.5}
+.mode .new{font-family:var(--f-mono);font-size:.7rem;color:var(--warn);letter-spacing:.06em}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.progress-dots{display:flex;gap:3px;flex-wrap:wrap}
+.progress-dots i{width:10px;height:10px;border-radius:3px;background:var(--grid);display:block}
+.progress-dots i.ok{background:var(--ok)} .progress-dots i.bad{background:var(--bad)} .progress-dots i.cur{background:var(--accent)}
+.qtext{font-size:1.1rem;line-height:1.8;min-width:0;overflow-wrap:anywhere}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);min-height:52px;min-width:0}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .k{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-family:var(--f-mono);font-size:.85rem;background:var(--grid);color:var(--muted)}
+.opt .t{min-width:0;overflow-x:auto}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)} .opt.ok .k{background:var(--ok);color:var(--paper)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)} .opt.bad .k{background:var(--bad);color:var(--paper)}
+.opts.tf{grid-template-columns:1fr 1fr}
+.fb{border-radius:10px;padding:14px 16px;display:grid;gap:8px;animation:pop .25s ease-out}
+.fb.ok{background:var(--ok-soft);border:1px solid var(--ok)} .fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb h4{margin:0;font-family:var(--f-display);font-size:1.1rem}
+.fb.ok h4{color:var(--ok)} .fb.bad h4{color:var(--bad)}
+.fb .lbl{font-weight:700}
+@keyframes pop{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.pick .btn{text-align:left;display:flex;justify-content:space-between;gap:8px}
+.lvls{display:flex;gap:6px;flex-wrap:wrap}
+.lvls .btn{display:flex;gap:6px;align-items:center}
+.result{display:grid;gap:14px;text-align:center;justify-items:center}
+.ring{width:130px;height:130px} .ring text{font-family:var(--f-mono);fill:var(--ink)}
+.breakdown{display:grid;gap:8px;width:100%;text-align:left}
+.breakdown .r{display:grid;grid-template-columns:minmax(0,12rem) 1fr 3.5rem;gap:10px;align-items:center;font-size:.9rem}
+.breakdown .bar{width:100%}
+.prob{display:grid;gap:12px}
+.steps{display:grid;gap:8px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--line);animation:pop .25s ease-out;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:.8rem;width:24px;height:24px;border-radius:7px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-top:3px}
+.steps li > div{min-width:0;overflow-x:auto}
+.steps li.hint{background:var(--hl);color:var(--hl-ink);border-color:transparent}
+.steps li.hint::before{content:"?"}
+.steps li.note{background:#2A2008;border-color:#5A4512;color:#FBE3A6}
+.steps li.note::before{content:"!";background:#5A4512;color:var(--warn)}
+.ans{font-weight:700}
+.spot li{cursor:pointer;transition:border-color .15s}
+.spot li:hover{border-color:var(--accent)}
+.spot li.bad{border-color:var(--bad);background:var(--bad-soft)}
+.spot li.ok{border-color:var(--ok);background:var(--ok-soft)}
+.spot.done li{cursor:default}
+.flash{perspective:1200px;min-height:230px}
+.flash .inner{position:relative;min-height:230px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .inner{transform:rotateY(180deg)}
+.flash .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);border:1px solid var(--line);background:var(--card);padding:22px;display:grid;place-items:center;text-align:center;gap:8px;overflow:auto}
+.flash .back{transform:rotateY(180deg);background:var(--accent-soft)}
+.flash .face p{font-size:1.15rem}
+.flash .tag{position:absolute;top:10px;left:12px}
+.rules{display:grid;gap:12px}
+.rules details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:4px 16px}
+.rules summary{cursor:pointer;padding:12px 0;font-family:var(--f-display);font-size:1.1rem;list-style:none;display:flex;justify-content:space-between;gap:8px}
+.rules summary::-webkit-details-marker{display:none}
+.rules summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+.rules details[open] summary::after{content:"−"}
+.rules ul{margin:0 0 14px;padding-left:20px;display:grid;gap:6px}
+.rules li{min-width:0;overflow-x:auto}
+.miss{font-family:var(--f-mono);font-size:.75rem;color:var(--bad);margin-left:auto;margin-right:10px;align-self:center}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.idea{display:grid;gap:6px;align-content:start}
+.idea .n{font-family:var(--f-mono);font-size:.75rem;color:var(--accent)}
+.idea p{font-size:.92rem;color:var(--muted)}
+.tree{display:grid;gap:12px}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;font-size:.82rem}
+.crumbs span{background:var(--grid);padding:2px 10px;border-radius:99px;color:var(--muted)}
+.tree .end{background:var(--ok-soft);border:1px solid var(--ok);border-radius:10px;padding:14px}
+.pomo{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.pomo .time,.big{font-family:var(--f-mono);font-size:2.6rem;font-variant-numeric:tabular-nums;line-height:1}
+.plan{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.plan li{display:grid;grid-template-columns:4.5rem 1fr;gap:10px;padding:10px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--line)}
+.plan li b{font-family:var(--f-display)}
+.empty{text-align:center;padding:30px 16px;display:grid;gap:10px;justify-items:center}
+.timer{font-family:var(--f-mono);font-variant-numeric:tabular-nums;background:var(--grid);padding:2px 10px;border-radius:8px}
+.timer.low{background:var(--bad-soft);color:var(--bad)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match .col{display:grid;gap:8px;align-content:start;min-width:0}
+.tile{padding:12px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);min-height:56px;display:grid;place-items:center;text-align:center;overflow-x:auto;min-width:0}
+.tile:hover:not(:disabled){border-color:var(--accent)}
+.tile.sel{border-color:var(--accent);background:var(--accent-soft)}
+.tile.done{border-color:var(--ok);background:var(--ok-soft);opacity:.7;cursor:default}
+.tile.no{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+.stage{display:grid;gap:10px;padding:12px;border-radius:10px;background:var(--card2);border:1px solid var(--line);animation:pop .25s ease-out}
+.stage .done-line{color:var(--ok);font-weight:600}
+.secfilter{display:flex;gap:6px;flex-wrap:wrap}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding-bottom:30px}
+@media (max-width:520px){ .breakdown .r{grid-template-columns:minmax(0,7.5rem) 1fr 3rem} .qtext{font-size:1.03rem} .match{gap:6px} .tile{padding:8px} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Calculus I Notes Drill <small>§1.1 – 2.5</small></h1>
+      <div class="overall"><span id="ovTxt">0%</span><div class="bar"><i id="ovBar" style="width:0"></i></div></div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <a href="#home" data-v="home">Home</a>
+      <a href="#quiz" data-v="quiz">Quiz</a>
+      <a href="#steps" data-v="steps">Worked steps</a>
+      <a href="#nextstep" data-v="nextstep">Next step?</a>
+      <a href="#speed" data-v="speed">Speed round</a>
+      <a href="#match" data-v="match">Match</a>
+      <a href="#exam" data-v="exam">Mock exam</a>
+      <a href="#spot" data-v="spot">Spot the mistake</a>
+      <a href="#cards" data-v="cards">Flashcards</a>
+      <a href="#sheet" data-v="sheet">Night-before sheet</a>
+      <a href="#mistakes" data-v="mistakes">My mistakes<span class="cnt" id="mCnt"></span></a>
+      <a href="#ideas" data-v="ideas">Study ideas</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<footer class="wrap">Built from your lecture notes, sections 1.1 – 2.5. Every answer was re-checked by calculation. Your progress is saved in this browser only.</footer>
+
+<script>
+const R = String.raw;
+const TOPICS = {
+  s11:{n:'Limits: intuitive approach',sec:'1.1',s:'One-sided limits, |x|/x, reading limits from graphs, infinite limits'},
+  s12:{n:'Computing limits',sec:'1.2',s:'Limit laws, polynomials, 0/0 by factoring, radicals, k/0 sign charts, piecewise'},
+  s13:{n:'Limits at infinity',sec:'1.3',s:'Horizontal asymptotes, end behavior, rational functions, radicals, conjugates'},
+  s14:{n:'Limits rigorously (ε–δ)',sec:'1.4',s:'The formal definition and choosing δ'},
+  s15:{n:'Continuity',sec:'1.5',s:'Three conditions, intervals, rational functions, |x|, compositions'},
+  s16:{n:'Trig continuity & squeeze',sec:'1.6',s:'sin x/x, tan x/x, sin ax/sin bx, the squeeze theorem'},
+  s21:{n:'Tangent lines',sec:'2.1',s:'Slope as a limit, the h-form, tangent line equations'},
+  s23:{n:'Differentiation rules',sec:'2.3',s:'Constants, power rule, sums, higher derivatives'},
+  s24:{n:'Product & quotient rules',sec:'2.4',s:'(fg)′, (f/g)′, two methods for the same derivative'},
+  s25:{n:'Trig derivatives',sec:'2.5',s:'Six trig derivatives, product/quotient with trig, f″ of sec x'}
+};
+
+/* ===== Question bank (lv: 1 easy, 2 medium, 3 hard) ===== */
+const QB=[];
+function TF(t,lv,q,ans,e,w){QB.push({t,lv,type:'tf',q,o:['True','False'],a:ans?0:1,e,w:w?{[ans?1:0]:w}:{}});}
+function MC(t,lv,q,o,a,e,w){QB.push({t,lv,type:'mc',q,o,a,e,w:w||{}});}
+const DNE='Does not exist';
+
+/* 1.1 */
+MC('s11',1,R`From the table in Figure 1.1.8, \(\displaystyle\lim_{x\to2}(x^2-x+1)=\)`,['3','2','4','1'],0,R`As \(x\to2\) from both sides, the values approach \(3\). (Also \(4-2+1=3\).)`,{1:R`2 is where \(x\) is heading, not the value of \(f(x)\).`,2:R`\(x^2=4\) but you still have to subtract \(x\) and add 1.`,3:R`\(f(1)=1\), but \(x\) is approaching 2, not 1.`});
+MC('s11',1,R`\(\displaystyle\lim_{x\to0^+}\frac{|x|}{x}=\)`,['1','−1','0',DNE],0,R`For \(x>0\), \(|x|=x\), so \(\frac{|x|}{x}=\frac{x}{x}=1\).`,{1:R`That is the limit from the <b>left</b>, where \(|x|=-x\).`,2:R`The quotient is constantly 1 for \(x>0\); it never gets near 0.`,3:R`A one-sided limit can exist even when the two-sided one doesn't. From the right it is 1.`});
+MC('s11',1,R`\(\displaystyle\lim_{x\to0}\frac{|x|}{x}=\)`,['1','−1','0',DNE],3,R`Right limit \(=1\), left limit \(=-1\). They are different, so the two-sided limit does not exist (Example 4).`,{0:R`That is only the right-hand limit.`,1:R`That is only the left-hand limit.`,2:R`Never average the two one-sided limits.`});
+TF('s11',1,R`The two-sided limit \(\lim_{x\to a}f(x)\) exists if and only if both one-sided limits exist and have the same value.`,true,R`This is Theorem 1.1.3.`,R`This is exactly Theorem 1.1.3, so it is true.`);
+MC('s11',2,R`A graph approaches height 1 from the left of \(x=a\), approaches height 3 from the right, and has a solid dot at \((a,2)\). \(\displaystyle\lim_{x\to a}f(x)=\)`,['1','2','3',DNE],3,R`Left limit 1 ≠ right limit 3, so the limit does not exist. The dot only tells you \(f(a)=2\) (Example 5).`,{0:R`1 is the left-hand limit only.`,1:R`2 is \(f(a)\), the value at the point. A limit doesn't care about \(f(a)\).`,2:R`3 is the right-hand limit only.`});
+MC('s11',2,R`Both sides of a graph approach height 2 at \(x=a\). There is a hole at \((a,2)\) and a solid dot at \((a,3)\). \(\displaystyle\lim_{x\to a}f(x)=\)`,['2','3',DNE,'2.5'],0,R`Both one-sided limits equal 2, so the limit is 2. The dot at height 3 is \(f(a)\), which doesn't affect the limit (Example 6).`,{1:R`3 is \(f(a)\). The limit is about where the curve is heading.`,2:R`Both sides agree at 2, so the limit exists.`,3:R`There is no averaging in limits.`});
+TF('s11',2,R`If \(f(a)\) is undefined, then \(\lim_{x\to a}f(x)\) cannot exist.`,false,R`In Example 6 (first graph) there is a hole at \(x=a\), yet the limit is 2. A limit only looks at values near \(a\).`,R`A hole at \(a\) doesn't stop the limit from existing. See Example 6.`);
+MC('s11',2,R`For \(f(x)=\dfrac{1}{x-a}\): \(\displaystyle\lim_{x\to a^+}f(x)=\)`,[R`\(+\infty\)`,R`\(-\infty\)`,'0','1'],0,R`For \(x\) slightly bigger than \(a\), \(x-a\) is a tiny positive number, so \(\frac1{x-a}\) grows without bound (Example 7a).`,{1:R`That's the left side, where \(x-a<0\).`,2:R`The denominator goes to 0, so the fraction blows up instead of shrinking.`,3:R`There's no reason for it to settle at 1.`});
+MC('s11',2,R`For \(f(x)=\dfrac{1}{(x-a)^2}\): \(\displaystyle\lim_{x\to a}f(x)=\)`,[R`\(+\infty\)`,R`\(-\infty\)`,'Does not exist (sides differ)','0'],0,R`The square makes the denominator positive on both sides, so both one-sided limits are \(+\infty\). We write \(\lim_{x\to a}f(x)=+\infty\) (Example 7b).`,{1:R`\((x-a)^2>0\), so the fraction is positive.`,2:R`Both sides go to \(+\infty\). They agree.`,3:R`The denominator approaches 0, so the fraction gets huge.`});
+MC('s11',2,R`For \(f(x)=\dfrac{-1}{x-a}\): \(\displaystyle\lim_{x\to a^-}f(x)=\)`,[R`\(+\infty\)`,R`\(-\infty\)`,'0','−1'],0,R`From the left, \(x-a\) is a small negative number, so \(\frac{-1}{\text{small negative}}\to+\infty\) (Example 7c).`,{1:R`Negative over negative is positive.`,2:R`The denominator → 0, so the fraction doesn't shrink.`,3:R`The value isn't fixed; it grows without bound.`});
+MC('s11',2,R`For \(f(x)=\dfrac{-1}{(x-a)^2}\): \(\displaystyle\lim_{x\to a}f(x)=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,DNE,'0'],0,R`The denominator is positive on both sides, and the numerator is −1, so \(f\to-\infty\) from both sides (Example 7d).`,{1:R`The numerator is negative.`,2:R`Both sides agree on \(-\infty\), so we write \(-\infty\).`,3:R`The denominator → 0, so the size blows up.`});
+MC('s11',1,R`\(\displaystyle\lim_{x\to0^-}\frac1x=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'0',DNE],0,R`From the table: \(x=-0.001\) gives \(-1000\). The values decrease without bound.`,{1:R`That's the right-hand side.`,2:R`Dividing 1 by a tiny number makes it huge, not small.`,3:R`As a one-sided limit we describe it as \(-\infty\).`});
+
+/* 1.2 */
+MC('s12',1,R`\(\displaystyle\lim_{x\to5}(x^2-4x+3)=\)`,['8','48','−8','3'],0,R`Polynomial, so substitute directly: \(25-20+3=8\) (Example 5).`,{1:R`You added \(4x\). It's \(25-20+3\).`,2:R`Check the arithmetic: \(25-20=5\), then \(+3=8\).`,3:R`That's only the constant term.`});
+MC('s12',1,R`\(\displaystyle\lim_{x\to1}(x^7-2x^5+1)^{35}=\)`,['0','1','−1',R`\(2^{35}\)`],0,R`Inside: \(1-2+1=0\), and \(0^{35}=0\) (Example 6).`,{1:R`\(1-2(1)+1=0\), not 1.`,2:R`The inside is 0, and any positive power of 0 is 0.`,3:R`Don't forget the minus sign in \(-2x^5\).`});
+MC('s12',1,R`\(\displaystyle\lim_{x\to2}\frac{5x^3+4}{x-3}=\)`,['−44','44','−36',DNE],0,R`The denominator \(2-3=-1\neq0\), so substitute: \(\frac{5(8)+4}{-1}=-44\) (Example 7).`,{1:R`The denominator is \(-1\), so the sign flips.`,2:R`\(5\cdot8=40\), then \(+4=44\).`,3:R`The denominator isn't 0 at \(x=2\), so direct substitution works.`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to4^+}\frac{2-x}{(x-4)(x+2)}=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'0',DNE],0,R`Numerator \(\to-2\). For \(x>4\): \(x-4\to0^+\) and \(x+2=6\), so the denominator is \(0^+\). \(\frac{-2}{0^+}=-\infty\) (Example 8a).`,{1:R`The numerator is negative (−2) and the denominator is positive.`,2:R`The numerator is −2, not 0.`,3:R`For a one-sided limit we report \(-\infty\).`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to4^-}\frac{2-x}{(x-4)(x+2)}=\)`,[R`\(+\infty\)`,R`\(-\infty\)`,'0',DNE],0,R`For \(x<4\): \(x-4\to0^-\), so the denominator is \(0^-\). \(\frac{-2}{0^-}=+\infty\) (Example 8b).`,{1:R`Negative over negative is positive.`,2:R`The numerator is −2, not 0.`,3:R`Report the one-sided limit as \(+\infty\).`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to4}\frac{2-x}{(x-4)(x+2)}=\)`,[DNE,R`\(+\infty\)`,R`\(-\infty\)`,'0'],0,R`Right side \(-\infty\), left side \(+\infty\). They differ, so the limit does not exist (Example 8c).`,{1:R`That's only the left-hand limit.`,2:R`That's only the right-hand limit.`,3:R`The numerator is −2, so it isn't 0.`});
+MC('s12',1,R`\(\displaystyle\lim_{x\to3}\frac{x^2-6x+9}{x-3}=\)`,['0',DNE,'1','6'],0,R`\(\frac00\), so factor: \(\frac{(x-3)^2}{x-3}=x-3\to0\) (Example 9a).`,{1:R`\(\frac00\) means "simplify", not "does not exist".`,2:R`After cancelling, \(x-3\) at \(x=3\) is 0.`,3:R`\(x^2-6x+9=(x-3)^2\), not \((x-3)(x+3)\).`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to-4}\frac{2x+8}{x^2+x-12}=\)`,[R`\(-\frac27\)`,R`\(\frac27\)`,'−2','0'],0,R`\(\frac{2(x+4)}{(x+4)(x-3)}=\frac{2}{x-3}\to\frac{2}{-7}\) (Example 9b).`,{1:R`\(-4-3=-7\), so the answer is negative.`,2:R`You forgot to divide by \(x-3\).`,3:R`\(\frac00\) is not 0. Factor and cancel first.`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to5}\frac{x^2-3x-10}{x^2-10x+25}=\)`,[DNE,'7',R`\(+\infty\)`,'0'],0,R`\(\frac{(x-5)(x+2)}{(x-5)^2}=\frac{x+2}{x-5}\). Near 5 this is \(\frac{7}{0}\): \(+\infty\) from the right, \(-\infty\) from the left, so the limit does not exist (Example 9c).`,{1:R`7 is the numerator after cancelling; the denominator still goes to 0.`,2:R`That's only the right-hand limit.`,3:R`\(\frac00\) isn't 0. After cancelling you get \(\frac70\).`});
+MC('s12',2,R`\(\displaystyle\lim_{x\to1}\frac{x-1}{\sqrt x-1}=\)`,['2',R`\(\frac12\)`,'0','1'],0,R`Multiply by \(\frac{\sqrt x+1}{\sqrt x+1}\): \(\frac{(x-1)(\sqrt x+1)}{x-1}=\sqrt x+1\to2\) (Example 10).`,{1:R`You flipped it. That's \(\lim\frac{\sqrt x-1}{x-1}\).`,2:R`\(\frac00\) means simplify, not 0.`,3:R`After simplifying you get \(\sqrt1+1=2\).`});
+MC('s12',2,R`\(f(x)=\begin{cases}\frac{1}{x+2}, & x<-2\\ x^2-5, & -2<x\le3\\ \sqrt{x+13}, & x>3\end{cases}\) &nbsp; \(\displaystyle\lim_{x\to-2}f(x)=\)`,[DNE,'−1',R`\(-\infty\)`,'4'],0,R`Left: \(\frac{1}{0^-}=-\infty\). Right: \((-2)^2-5=-1\). They differ, so the limit does not exist (Example 11a).`,{1:R`That's only the right-hand limit.`,2:R`That's only the left-hand limit.`,3:R`4 is the limit at \(x=3\).`});
+MC('s12',1,R`Same \(f\) as above. \(\displaystyle\lim_{x\to0}f(x)=\)`,['−5','5',R`\(\frac12\)`,'0'],0,R`\(x=0\) is inside \(-2<x\le3\), so use \(x^2-5\): \(0-5=-5\) (Example 11b).`,{1:R`\(0^2-5=-5\).`,2:R`\(\frac{1}{x+2}\) is only for \(x<-2\).`,3:R`Use the middle piece: \(-5\).`});
+MC('s12',2,R`Same \(f\) as above. \(\displaystyle\lim_{x\to3}f(x)=\)`,['4',R`\(\sqrt{13}\)`,DNE,'9'],0,R`Left: \(9-5=4\). Right: \(\sqrt{3+13}=\sqrt{16}=4\). Equal, so the limit is 4 (Example 11c).`,{1:R`Substitute \(x=3\) into \(\sqrt{x+13}\): \(\sqrt{16}\).`,2:R`Both sides give 4, so the limit exists.`,3:R`\(9\) is \(x^2\). Subtract 5.`});
+TF('s12',1,R`\(\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{L_1}{L_2}\) provided \(L_2\neq0\).`,true,R`Theorem 1.2.2(d).`,R`This is Theorem 1.2.2(d) word for word.`);
+TF('s12',2,R`\(\lim_{x\to a}\sqrt[n]{f(x)}=\sqrt[n]{L_1}\) always holds, even if \(n\) is even and \(L_1<0\).`,false,R`Theorem 1.2.2(e) needs \(L_1>0\) when \(n\) is even (an even root of a negative number isn't real).`,R`Check the condition in Theorem 1.2.2(e): \(L_1>0\) if \(n\) is even.`);
+TF('s12',1,R`\(\displaystyle\lim_{x\to\pi}3=\pi\).`,false,R`The limit of a constant is the constant: \(\lim_{x\to\pi}3=3\) (Example 1).`,R`\(f(x)=3\) never changes, so its limit is 3.`);
+
+/* 1.3 */
+MC('s13',1,R`\(\displaystyle\lim_{x\to+\infty}\tan^{-1}x=\)`,[R`\(\frac\pi2\)`,R`\(-\frac\pi2\)`,R`\(+\infty\)`,'0'],0,R`The graph of \(\tan^{-1}x\) levels off at \(y=\frac\pi2\) on the right (Example 2).`,{1:R`That's the limit as \(x\to-\infty\).`,2:R`\(\tan^{-1}x\) is bounded between \(-\frac\pi2\) and \(\frac\pi2\).`,3:R`0 is \(\tan^{-1}0\).`});
+MC('s13',1,R`The horizontal asymptote(s) of \(y=\tan^{-1}x\) are`,[R`\(y=\pm\frac\pi2\)`,R`\(y=\frac\pi2\) only`,R`\(x=\pm\frac\pi2\)`,R`\(y=0\)`],0,R`\(y=\frac\pi2\) in the positive direction and \(y=-\frac\pi2\) in the negative direction.`,{1:R`As \(x\to-\infty\) it approaches \(-\frac\pi2\).`,2:R`Horizontal asymptotes are \(y=\) lines.`,3:R`The curve crosses \(y=0\) at the origin.`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to+\infty}\left(1+\frac1x\right)^x=\)`,['e','1',R`\(+\infty\)`,'0'],0,R`This is the definition of \(e\) (Example 3). It is also \(e\) as \(x\to-\infty\).`,{1:R`The base → 1 but the exponent → ∞. \(1^\infty\) is indeterminate.`,2:R`The graph levels off at \(y=e\approx2.718\).`,3:R`The base is bigger than 1 for large \(x\).`});
+MC('s13',3,R`\(\displaystyle\lim_{x\to+\infty}\left(1+\frac1{2x}\right)^x=\)`,[R`\(\sqrt e\)`,'e',R`\(e^2\)`,'1'],0,R`Rewrite as \(\left[\left(1+\frac1{2x}\right)^{2x}\right]^{1/2}\to e^{1/2}=\sqrt e\) (Example 4b).`,{1:R`The exponent needs to be \(2x\) to match \(\frac1{2x}\). That costs a power of \(\frac12\).`,2:R`The power is \(\frac12\), not 2.`,3:R`\(1^\infty\) is indeterminate.`});
+MC('s13',1,R`\(\displaystyle\lim_{x\to-\infty}2x^5=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'0','2'],0,R`Odd power of a negative number is negative: \(2(-\infty)^5=-\infty\) (Example 5).`,{1:R`That's the limit as \(x\to+\infty\).`,2:R`Polynomials don't go to 0 at infinity.`,3:R`2 is just the coefficient.`});
+MC('s13',1,R`\(\displaystyle\lim_{x\to-\infty}(-7x^6)=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'−7','0'],0,R`\(x^6\to+\infty\) (even power), and \(-7\) flips the sign: \(-\infty\) (Example 5).`,{1:R`\((-\infty)^6=+\infty\), but then multiply by \(-7\).`,2:R`−7 is the coefficient, not the limit.`,3:R`Polynomials grow without bound.`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to-\infty}(7x^5-4x^3+2x-9)=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'−9','7'],0,R`End behavior matches the highest term: \(7x^5\to7(-\infty)=-\infty\) (Example 6).`,{1:R`\(x^5\) is negative when \(x\) is negative.`,2:R`−9 is the constant term; it's swamped.`,3:R`7 is a coefficient.`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to-\infty}(-4x^8+17x^3-5x+1)=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,'−4','1'],0,R`Highest term \(-4x^8\). \(x^8\to+\infty\), times \(-4\) gives \(-\infty\) (Example 6).`,{1:R`\(x^8\) is positive, but the coefficient is −4.`,2:R`−4 is a coefficient.`,3:R`1 is the constant term.`});
+MC('s13',1,R`\(\displaystyle\lim_{x\to+\infty}\frac{3x+5}{6x-8}=\)`,[R`\(\frac12\)`,'2',R`\(-\frac58\)`,R`\(+\infty\)`],0,R`Divide by \(x\): \(\frac{3+5/x}{6-8/x}\to\frac36=\frac12\) (Example 7).`,{1:R`You flipped the ratio.`,2:R`That's \(f(0)\), not the limit at infinity.`,3:R`Same degree top and bottom, so the limit is finite.`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to-\infty}\frac{4x^2-x}{2x^3-5}=\)`,['0','2',R`\(-\infty\)`,R`\(\frac12\)`],0,R`Divide by \(x^3\): \(\frac{4/x-1/x^2}{2-5/x^3}\to\frac{0}{2}=0\). (Quick: \(\frac{4x^2}{2x^3}=\frac{2}{x}\to0\).) (Example 8a)`,{1:R`2 is the ratio of coefficients, but the degrees differ.`,2:R`The denominator has the higher degree, so the fraction shrinks.`,3:R`Compare highest powers: \(x^2\) vs \(x^3\).`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to+\infty}\frac{5x^3-2x^2+1}{1-3x}=\)`,[R`\(-\infty\)`,R`\(+\infty\)`,R`\(-\frac53\)`,'5'],0,R`Quick method: \(\frac{5x^3}{-3x}=-\frac53x^2\to-\infty\) (Examples 8b and 9).`,{1:R`The denominator's leading term is \(-3x\), which is negative.`,2:R`The degrees differ (3 vs 1), so it isn't a ratio of coefficients.`,3:R`The numerator grows faster, so the result is unbounded.`});
+MC('s13',2,R`\(\displaystyle\lim_{x\to+\infty}\frac{\sqrt{x^2+2}}{3x-6}=\)`,[R`\(\frac13\)`,R`\(-\frac13\)`,'3','0'],0,R`\(\sqrt{x^2(1+2/x^2)}=|x|\sqrt{1+2/x^2}\), and \(|x|=x\) for \(x>0\). Cancel \(x\): \(\frac{1}{3}\) (Example 10a).`,{1:R`That's the answer as \(x\to-\infty\).`,2:R`You flipped the ratio.`,3:R`\(\sqrt{x^2}\) has degree 1, same as \(3x\).`});
+MC('s13',3,R`\(\displaystyle\lim_{x\to-\infty}\frac{\sqrt{x^2+2}}{3x-6}=\)`,[R`\(-\frac13\)`,R`\(\frac13\)`,'−3','0'],0,R`For \(x<0\), \(\sqrt{x^2}=|x|=-x\). So you get \(\frac{-x\sqrt{1+2/x^2}}{x(3-6/x)}\to-\frac13\) (Example 10b).`,{1:R`Trap: \(\sqrt{x^2}=|x|=-x\) when \(x\) is negative.`,2:R`You flipped the ratio.`,3:R`Degrees match, so the limit is finite and nonzero.`});
+MC('s13',3,R`\(\displaystyle\lim_{x\to+\infty}\left(\sqrt{x^6+5}-x^3\right)=\)`,['0','5',R`\(\sqrt5\)`,R`\(+\infty\)`],0,R`Conjugate: \(\frac{5}{\sqrt{x^6+5}+x^3}\to\frac{5}{\infty}=0\) (Example 11a).`,{1:R`5 is the numerator after the conjugate, but the denominator → ∞.`,2:R`\(\sqrt{x^6+5}\neq x^3+\sqrt5\).`,3:R`\(\infty-\infty\) is indeterminate; the conjugate shows it goes to 0.`});
+MC('s13',3,R`\(\displaystyle\lim_{x\to+\infty}\left(\sqrt{x^6+5x^3}-x^3\right)=\)`,[R`\(\frac52\)`,'0','5',R`\(+\infty\)`],0,R`Conjugate: \(\frac{5x^3}{\sqrt{x^6+5x^3}+x^3}\). Divide by \(x^3\): \(\frac{5}{\sqrt{1+5/x^3}+1}\to\frac52\) (Example 11b).`,{1:R`This time the numerator is \(5x^3\), which also grows.`,2:R`Don't forget the denominator becomes \(1+1=2\).`,3:R`After dividing by \(x^3\) everything is finite.`});
+TF('s13',1,R`\(\displaystyle\lim_{x\to-\infty}x^n=+\infty\) for every positive integer \(n\).`,false,R`Only for even \(n\). For odd \(n\) (1, 3, 5, …) it is \(-\infty\) (formula 16).`,R`Try \(n=3\): \((-10)^3=-1000\). Odd powers keep the minus sign.`);
+TF('s13',1,R`To find the limit of a rational function at \(\pm\infty\), you may keep only the highest-degree term of the top and of the bottom.`,true,R`This is the quick method (Example 9).`,R`That's exactly the quick method from Example 9.`);
+
+/* 1.4 */
+MC('s14',2,R`Definition 1.4.1: \(\lim_{x\to a}f(x)=L\) means`,[R`for every \(\epsilon>0\) there is a \(\delta>0\) such that \(|f(x)-L|<\epsilon\) whenever \(0<|x-a|<\delta\)`,R`for every \(\delta>0\) there is an \(\epsilon>0\) such that \(|x-a|<\epsilon\) whenever \(|f(x)-L|<\delta\)`,R`\(f(a)=L\)`,R`there is one \(\epsilon\) that works for all \(\delta\)`],0,R`The challenge is \(\epsilon\) (closeness to \(L\)); you answer with \(\delta\) (closeness to \(a\)).`,{1:R`The roles are swapped. \(\epsilon\) is given first, for the \(y\)-values.`,2:R`The definition never uses \(f(a)\); \(f\) needn't be defined at \(a\).`,3:R`It must work for <b>every</b> \(\epsilon>0\).`});
+MC('s14',2,R`To prove \(\lim_{x\to2}(3x-5)=1\) with Definition 1.4.1, which \(\delta\) works?`,[R`\(\delta=\frac\epsilon3\)`,R`\(\delta=3\epsilon\)`,R`\(\delta=\epsilon+2\)`,R`\(\delta=\epsilon\)`],0,R`\(|(3x-5)-1|=3|x-2|<\epsilon\) when \(|x-2|<\frac\epsilon3\) (Example 1).`,{1:R`Then \(3|x-2|<9\epsilon\), which is too big.`,2:R`\(\delta\) must shrink as \(\epsilon\) shrinks.`,3:R`Then \(3|x-2|<3\epsilon\), which can be bigger than \(\epsilon\).`});
+MC('s14',3,R`To prove \(\lim_{x\to0^+}\sqrt x=0\), which \(\delta\) works?`,[R`\(\delta=\epsilon^2\)`,R`\(\delta=\sqrt\epsilon\)`,R`\(\delta=2\epsilon\)`,R`\(\delta=\frac\epsilon2\)`],0,R`We need \(\sqrt x<\epsilon\), i.e. \(x<\epsilon^2\). So \(0<x<\epsilon^2\) works (Example 2).`,{1:R`If \(x<\sqrt\epsilon\) then \(\sqrt x<\epsilon^{1/4}\), which is too big when \(\epsilon<1\).`,2:R`If \(\epsilon=0.01\), \(x=0.019\) gives \(\sqrt x\approx0.14>0.01\).`,3:R`If \(\epsilon=0.01\), \(x=0.004\) gives \(\sqrt x\approx0.06>0.01\).`});
+TF('s14',1,R`In Definition 1.4.1, \(f\) must be defined at \(x=a\).`,false,R`The definition says "with the possible exception that \(f(x)\) need not be defined at \(a\)".`,R`Re-read the definition: \(f\) need not be defined at \(a\).`);
+TF('s14',2,R`The condition \(0<|x-a|\) in the definition means we ignore \(x=a\) itself.`,true,R`\(|x-a|>0\) means \(x\neq a\).`,R`\(0<|x-a|\) is exactly the statement \(x\ne a\).`);
+
+/* 1.5 */
+MC('s15',1,R`\(f(x)=\dfrac{x^2-4}{x-2}\) is discontinuous at \(x=2\) because`,[R`\(f(2)\) is not defined`,R`\(\lim_{x\to2}f(x)\) does not exist`,R`\(\lim_{x\to2}f(x)\neq f(2)\)`,'it is continuous at 2'],0,R`At \(x=2\) the denominator is 0, so condition 1 fails (Example 1).`,{1:R`The limit exists: \(\lim(x+2)=4\).`,2:R`You can't compare with \(f(2)\); it doesn't exist.`,3:R`Condition 1 fails, so it isn't continuous.`});
+MC('s15',2,R`\(g(x)=\begin{cases}\frac{x^2-4}{x-2}, & x\ne2\\ 3, & x=2\end{cases}\) is discontinuous at \(x=2\) because`,[R`\(\lim_{x\to2}g(x)=4\neq g(2)=3\)`,R`\(g(2)\) is not defined`,R`\(\lim_{x\to2}g(x)\) does not exist`,'it is continuous at 2'],0,R`The limit is 4, but \(g(2)=3\). Condition 3 fails (Example 1).`,{1:R`\(g(2)=3\) is defined.`,2:R`The limit is 4.`,3:R`\(4\neq3\).`});
+MC('s15',1,R`Which is continuous at \(x=2\)? &nbsp; \(f=\frac{x^2-4}{x-2}\); \(g\) = same with \(g(2)=3\); \(h\) = same with \(h(2)=4\).`,[R`\(h\) only`,R`\(g\) only`,R`\(f\) and \(h\)`,'all three'],0,R`Only \(h(2)=4=\lim_{x\to2}h(x)\) (Example 1).`,{1:R`\(g(2)=3\) but the limit is 4.`,2:R`\(f(2)\) is undefined.`,3:R`\(f\) and \(g\) fail.`});
+MC('s15',2,R`\(f(x)=\sqrt{9-x^2}\) is continuous on`,[R`\([-3,3]\)`,R`\((-3,3)\)`,R`\([0,3]\)`,R`\(\mathbb R\)`],0,R`Domain \(|x|\le3\). It is continuous on \((-3,3)\), from the right at −3 and from the left at 3, so on \([-3,3]\) (Example 2).`,{1:R`At the endpoints it is one-sided continuous, so include them.`,2:R`Negative \(x\) works too: \(9-x^2\ge0\) for \(-3\le x\le3\).`,3:R`Outside \([-3,3]\) the root isn't real.`});
+MC('s15',1,R`\(y=\dfrac{x^2-9}{x^2-5x+6}\) is discontinuous at`,[R`\(x=2\) and \(x=3\)`,R`\(x=2\) only`,R`\(x=\pm3\)`,R`\(x=-3,2,3\)`],0,R`\(x^2-5x+6=(x-2)(x-3)=0\) at 2 and 3 (Example 3).`,{1:R`Even though \((x-3)\) cancels, \(y\) is undefined at \(x=3\), so it's still a discontinuity.`,2:R`±3 are zeros of the numerator, which don't cause discontinuity.`,3:R`−3 makes the numerator 0, not the denominator.`});
+TF('s15',1,R`\(|x|\) is continuous everywhere.`,true,R`For \(x>0\) it's \(x\), for \(x<0\) it's \(-x\) (both polynomials), and at 0 both sides → 0 \(=|0|\) (Example 4).`,R`See Example 4: both pieces are polynomials and they meet at 0.`);
+MC('s15',1,R`\(\displaystyle\lim_{x\to3}|5-x^2|=\)`,['4','−4','14',DNE],0,R`\(|x|\) is continuous, so \(\lim|g|=|\lim g|=|5-9|=4\).`,{1:R`Absolute value is never negative.`,2:R`\(5-9=-4\), not \(5+9\).`,3:R`\(|x|\) is continuous, so the limit passes inside.`});
+MC('s15',3,R`\(f(x)=\begin{cases}4, & x<0\\ x^2, & x\ge0\end{cases}\), \(g(x)=\begin{cases}3-x, & x<1\\ 2x, & x\ge1\end{cases}\). \(\displaystyle\lim_{x\to1}f(g(x))=\)`,['4','2','16',DNE],0,R`\(\lim_{x\to1^-}g=2\) and \(\lim_{x\to1^+}g=2\), so \(\lim g=2\). Then \(f(2)=2^2=4\).`,{1:R`2 is \(\lim g\). You still have to apply \(f\).`,2:R`\(f(2)=2^2=4\), not \(4^2\).`,3:R`Both sides of \(g\) agree at 2, so it exists.`});
+TF('s15',2,R`\(f\) is continuous on \([a,b]\) if it's continuous on \((a,b)\), continuous from the right at \(a\) and from the left at \(b\).`,true,R`Definition 1.5.2.`,R`That is Definition 1.5.2 exactly.`);
+TF('s15',1,R`A rational function is continuous at every point where its denominator is nonzero.`,true,R`Theorem 1.5.4(b).`,R`Theorem 1.5.4(b) says exactly this.`);
+TF('s15',2,R`If \(g\) is continuous at \(c\) and \(f\) is continuous at \(g(c)\), then \(f\circ g\) is continuous at \(c\).`,true,R`Theorem 1.5.6(a).`,R`That is Theorem 1.5.6(a).`);
+TF('s15',2,R`If \(f\) and \(g\) are continuous at \(c\), then \(f/g\) is continuous at \(c\).`,false,R`Only if \(g(c)\neq0\). If \(g(c)=0\), \(f/g\) has a discontinuity (Theorem 1.5.3d).`,R`Watch for \(g(c)=0\): you can't divide by zero.`);
+
+/* 1.6 */
+MC('s16',1,R`\(\displaystyle\lim_{x\to1}\cos\!\left(\frac{x^2-1}{x-1}\right)=\)`,[R`\(\cos2\)`,R`\(\cos1\)`,'1',DNE],0,R`\(\cos\) is continuous, so move the limit inside: \(\lim\frac{(x-1)(x+1)}{x-1}=2\). Answer \(\cos2\) (Example 1).`,{1:R`The inside goes to 2, not 1.`,2:R`That's \(\cos0\).`,3:R`Cancel \(x-1\) inside; the limit exists.`});
+MC('s16',1,R`\(\displaystyle\lim_{x\to0}\frac{\tan x}{x}=\)`,['1','0',R`\(+\infty\)`,DNE],0,R`\(\frac{\tan x}{x}=\frac{1}{\cos x}\cdot\frac{\sin x}{x}\to1\cdot1=1\) (Example 2a).`,{1:R`\(\frac00\) means simplify; it isn't 0.`,2:R`Rewrite \(\tan x=\frac{\sin x}{\cos x}\).`,3:R`It exists and equals 1.`});
+MC('s16',1,R`\(\displaystyle\lim_{\theta\to0}\frac{\sin2\theta}{\theta}=\)`,['2',R`\(\frac12\)`,'1','0'],0,R`\(2\cdot\frac{\sin2\theta}{2\theta}\to2\cdot1=2\) (Example 2b).`,{1:R`Multiply by 2, not divide.`,2:R`The angle is \(2\theta\), not \(\theta\).`,3:R`\(\frac00\) isn't 0.`});
+MC('s16',2,R`\(\displaystyle\lim_{x\to0}\frac{\sin3x}{\sin5x}=\)`,[R`\(\frac35\)`,R`\(\frac53\)`,'1','0'],0,R`\(\frac{3\cdot\frac{\sin3x}{3x}}{5\cdot\frac{\sin5x}{5x}}\to\frac35\) (Example 2c).`,{1:R`You flipped it.`,2:R`Only if the angles are the same.`,3:R`\(\frac00\) isn't 0.`});
+MC('s16',1,R`If \(8-x^3\le f(x)\le8+x^3\), then \(\displaystyle\lim_{x\to0}f(x)=\)`,['8','0','16',DNE],0,R`Both bounds → \(8\), so by the squeeze theorem \(\lim f=8\).`,{1:R`The bounds go to 8, not 0.`,2:R`Don't add the bounds.`,3:R`Squeeze guarantees the limit exists.`});
+MC('s16',1,R`If \(5x+2\le f(x)\le x^2+8\), then \(\displaystyle\lim_{x\to2}f(x)=\)`,['12','10','8','4'],0,R`\(5(2)+2=12\) and \(4+8=12\). Squeezed to 12.`,{1:R`\(5(2)=10\), then \(+2\).`,2:R`Substitute \(x=2\) into \(x^2+8\): \(4+8\).`,3:R`4 is \(x^2\) only.`});
+MC('s16',2,R`\(\displaystyle\lim_{x\to0}x\sin\!\left(\frac1x\right)=\)`,['0','1',DNE,R`\(+\infty\)`],0,R`\(-|x|\le x\sin\frac1x\le|x|\), and both bounds → 0 (Example 3b).`,{1:R`That's \(\lim\frac{\sin u}{u}\) as \(u\to0\), but here \(\frac1x\to\infty\).`,2:R`\(\sin\frac1x\) alone has no limit, but multiplying by \(x\to0\) squeezes it to 0.`,3:R`\(\sin\) is bounded between −1 and 1.`});
+MC('s16',2,R`\(\displaystyle\lim_{x\to0}x^3\cos\!\left(\frac1x\right)=\)`,['0','1',DNE,R`\(-\infty\)`],0,R`\(-|x|^3\le x^3\cos\frac1x\le|x|^3\), both → 0.`,{1:R`The \(x^3\) factor crushes it to 0.`,2:R`Bounded × (something → 0) → 0.`,3:R`\(\cos\) is bounded.`});
+TF('s16',1,R`\(\displaystyle\lim_{x\to0}\frac{1-\cos x}{x}=0\).`,true,R`Theorem 1.6.3(b).`,R`Theorem 1.6.3(b): it equals 0.`);
+TF('s16',3,R`For all \(x\neq0\): \(-x\le x\sin\!\left(\frac1x\right)\le x\).`,false,R`For \(x<0\) the inequality flips (e.g. \(-x>x\)). The correct bounds are \(-|x|\le x\sin\frac1x\le|x|\). (Your notes use \(-x\le\ldots\le x\), which only works for \(x>0\).)`,R`Try \(x=-1\): it would say \(1\le\ldots\le-1\), which is impossible. Use \(|x|\).`);
+TF('s16',1,R`\(\sin x\) and \(\cos x\) are continuous everywhere.`,true,R`Theorem 1.6.1.`,R`Theorem 1.6.1.`);
+
+/* 2.1 */
+MC('s21',1,R`The tangent line to \(y=x^2\) at \(P(1,1)\) is`,[R`\(y=2x-1\)`,R`\(y=2x+1\)`,R`\(y=x\)`,R`\(y=2x\)`],0,R`\(m=\lim_{x\to1}\frac{x^2-1}{x-1}=2\). Then \(y-1=2(x-1)\), so \(y=2x-1\) (Example 1).`,{1:R`Check the point: \(2(1)+1=3\neq1\).`,2:R`The slope is 2, not 1.`,3:R`This line doesn't pass through \((1,1)\).`});
+MC('s21',1,R`The slope of the tangent line using the \(h\)-form is`,[R`\(\displaystyle\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}\)`,R`\(\displaystyle\lim_{h\to0}\frac{f(x_0+h)-f(h)}{h}\)`,R`\(\displaystyle\frac{f(x_0+h)-f(x_0)}{h}\)`,R`\(\displaystyle\lim_{h\to0}\frac{f(x_0)-f(x_0+h)}{x_0}\)`],0,R`Formula (2) of 2.1, with \(h=x-x_0\).`,{1:R`Subtract \(f(x_0)\), not \(f(h)\).`,2:R`Without the limit, that's only a secant slope.`,3:R`Divide by \(h\), not \(x_0\).`});
+MC('s21',2,R`The tangent line to \(y=\frac2x\) at \((2,1)\) is`,[R`\(y=-\frac12x+2\)`,R`\(y=-\frac12x+1\)`,R`\(y=\frac12x\)`,R`\(y=-2x+5\)`],0,R`\(m=\lim_{h\to0}\frac{\frac{2}{2+h}-1}{h}=\lim\frac{-1}{2+h}=-\frac12\). \(y-1=-\frac12(x-2)\), so \(y=-\frac12x+2\) (Example 3).`,{1:R`Distribute: \(-\frac12(x-2)=-\frac12x+1\), then add the 1.`,2:R`The slope is negative.`,3:R`The slope is \(-\frac12\), not \(-2\).`});
+MC('s21',2,R`The slope of the tangent to \(y=\sqrt x\) at \(x_0=4\) is`,[R`\(\frac14\)`,R`\(\frac12\)`,'2','4'],0,R`\(m=\frac{1}{2\sqrt{x_0}}=\frac{1}{2\cdot2}=\frac14\) (Example 4).`,{1:R`That's the slope at \(x_0=1\).`,2:R`That's \(\sqrt4\), the \(y\)-value.`,3:R`4 is \(x_0\).`});
+MC('s21',2,R`The slope of the tangent to \(y=\sqrt x\) at \(x_0=9\) is`,[R`\(\frac16\)`,R`\(\frac13\)`,R`\(\frac19\)`,'3'],0,R`\(\frac{1}{2\sqrt9}=\frac16\) (Example 4).`,{1:R`Don't forget the 2 in \(2\sqrt{x_0}\).`,2:R`It's \(\frac{1}{2\sqrt{x_0}}\), not \(\frac1{x_0}\).`,3:R`3 is \(\sqrt9\), the \(y\)-value.`});
+TF('s21',1,R`If \(h=x-x_0\), then "\(x\to x_0\)" is the same as "\(h\to0\)".`,true,R`As \(x\) approaches \(x_0\), the difference \(x-x_0\) approaches 0.`,R`\(h=x-x_0\to x_0-x_0=0\).`);
+MC('s21',1,R`For \(f(x)=x^2\) at \(x_0=1\): \(\displaystyle\lim_{h\to0}\frac{(1+h)^2-1}{h}=\)`,['2','1','0',R`\(\frac00\)`],0,R`\(\frac{2h+h^2}{h}=2+h\to2\) (Example 2).`,{1:R`\((1+h)^2=1+2h+h^2\), so there's a \(2h\).`,2:R`Cancel \(h\) first; don't substitute too early.`,3:R`\(\frac00\) is the form before simplifying, not the answer.`});
+
+/* 2.3 */
+MC('s23',1,R`\(\dfrac{d}{dx}\left[-\sqrt2\right]=\)`,['0',R`\(-\frac{1}{2\sqrt2}\)`,R`\(-\sqrt2\)`,'1'],0,R`\(-\sqrt2\) is a constant, so its derivative is 0 (Example 1).`,{1:R`There's no \(x\) in \(\sqrt2\); it's a number.`,2:R`The derivative of a constant is 0, not itself.`,3:R`\(\frac{d}{dx}[x]=1\), but there's no \(x\).`});
+MC('s23',1,R`\(\dfrac{d}{dx}[4x^8]=\)`,[R`\(32x^7\)`,R`\(32x^8\)`,R`\(8x^7\)`,R`\(4x^7\)`],0,R`\(4\cdot8x^7=32x^7\) (Example 4).`,{1:R`Lower the power by 1.`,2:R`Keep the constant 4 and multiply.`,3:R`Bring the 8 down and multiply.`});
+MC('s23',1,R`\(\dfrac{d}{dx}\left[\dfrac\pi x\right]=\)`,[R`\(-\frac{\pi}{x^2}\)`,R`\(\frac\pi{x^2}\)`,R`\(-\frac1{x^2}\)`,'0'],0,R`\(\pi x^{-1}\to-\pi x^{-2}\) (Example 4).`,{1:R`The power \(-1\) brings down a minus sign.`,2:R`Keep the constant \(\pi\).`,3:R`It has an \(x\), so it isn't a constant.`});
+MC('s23',1,R`\(\dfrac{d}{dx}[2x^6+x^{-9}]=\)`,[R`\(12x^5-9x^{-10}\)`,R`\(12x^5-9x^{-8}\)`,R`\(12x^5+9x^{-10}\)`,R`\(6x^5-9x^{-10}\)`],0,R`\(2\cdot6x^5+(-9)x^{-10}\) (Example 5).`,{1:R`\(-9-1=-10\), not \(-8\).`,2:R`The exponent −9 comes down as −9.`,3:R`Multiply by the coefficient 2.`});
+MC('s23',2,R`\(\dfrac{d}{dx}\left[\dfrac{\sqrt x-2x}{\sqrt x}\right]=\)`,[R`\(-\frac{1}{\sqrt x}\)`,R`\(\frac1{2\sqrt x}\)`,'−2',R`\(-\frac{2}{\sqrt x}\)`],0,R`Simplify first: \(1-2x^{1/2}\). Derivative: \(-2\cdot\frac12x^{-1/2}=-\frac1{\sqrt x}\) (Example 5).`,{1:R`Simplify first: \(\frac{2x}{\sqrt x}=2\sqrt x\).`,2:R`\(\frac{2x}{\sqrt x}=2\sqrt x\), not \(2x\).`,3:R`\(\frac{d}{dx}[2\sqrt x]=\frac{1}{\sqrt x}\).`});
+MC('s23',1,R`If \(y=3x^8-2x^5+6x+1\), then \(\frac{dy}{dx}=\)`,[R`\(24x^7-10x^4+6\)`,R`\(24x^7-10x^4+6x\)`,R`\(24x^7-10x^4+7\)`,R`\(3x^7-2x^4+6\)`],0,R`\(3(8x^7)-2(5x^4)+6+0\) (Example 6).`,{1:R`\(\frac{d}{dx}[6x]=6\).`,2:R`The constant 1 differentiates to 0.`,3:R`Bring the exponents down.`});
+MC('s23',2,R`If \(f(x)=3x^4-2x^3+x^2-4x+2\), then \(f'''(x)=\)`,[R`\(72x-12\)`,R`\(36x^2-12x+2\)`,'72',R`\(12x^3-6x^2+2x-4\)`],0,R`\(f'=12x^3-6x^2+2x-4\), \(f''=36x^2-12x+2\), \(f'''=72x-12\) (Example 9).`,{1:R`That's \(f''\).`,2:R`That's \(f^{(4)}\).`,3:R`That's \(f'\).`});
+MC('s23',1,R`For the same \(f\), \(f^{(5)}(x)=\)`,['0','72',R`\(72x\)`,'−12'],0,R`\(f^{(4)}=72\), a constant, so \(f^{(5)}=0\), and so are all higher derivatives.`,{1:R`72 is \(f^{(4)}\).`,2:R`\(f'''=72x-12\); \(72x\) isn't any of them.`,3:R`Keep differentiating: constants → 0.`});
+TF('s23',1,R`\(\dfrac{d}{dx}[x^r]=rx^{r-1}\) for any real number \(r\).`,true,R`Extended power rule (Theorem 2.3.3).`,R`Theorem 2.3.3.`);
+TF('s23',1,R`\(\dfrac{d}{dx}[\pi]=1\).`,false,R`\(\pi\) is a constant, so its derivative is 0.`,R`\(\pi\approx3.14\) is a number, not \(x\).`);
+
+/* 2.4 */
+MC('s24',1,R`If \(y=(4x^2-1)(7x^3+x)\), then \(\frac{dy}{dx}=\)`,[R`\(140x^4-9x^2-1\)`,R`\(8x(21x^2+1)\)`,R`\(140x^4+9x^2-1\)`,R`\(28x^5-3x^3-x\)`],0,R`Product rule, or multiply first: \(y=28x^5-3x^3-x\), so \(y'=140x^4-9x^2-1\) (Example 1).`,{1:R`\((fg)'\neq f'g'\). Use \(fg'+gf'\).`,2:R`Check the \(x^2\) terms: \(4x^2-21x^2+8x^2=-9x^2\).`,3:R`That's \(y\) itself, not \(y'\).`});
+MC('s24',2,R`If \(s=(1+t)\sqrt t\), then \(\frac{ds}{dt}=\)`,[R`\(\frac12t^{-1/2}+\frac32t^{1/2}\)`,R`\(\frac{1}{2\sqrt t}\)`,R`\(\frac12t^{-1/2}+t^{1/2}\)`,R`\(1+\frac{1}{2\sqrt t}\)`],0,R`\((1+t)\cdot\frac12t^{-1/2}+1\cdot t^{1/2}=\frac12t^{-1/2}+\frac12t^{1/2}+t^{1/2}\) (Example 2).`,{1:R`That's \(f'g'\), not the product rule.`,2:R`\((1+t)\cdot\frac12t^{-1/2}\) also gives \(\frac12t^{1/2}\). Combine with \(t^{1/2}\).`,3:R`Use \(fg'+gf'\), not \(f'+g'\).`});
+MC('s24',2,R`If \(y=\dfrac{x^3+2x^2-1}{x+5}\), then \(y'=\)`,[R`\(\dfrac{2x^3+17x^2+20x+1}{(x+5)^2}\)`,R`\(\dfrac{2x^3+17x^2+20x-1}{(x+5)^2}\)`,R`\(3x^2+4x\)`,R`\(\dfrac{-2x^3-17x^2-20x-1}{(x+5)^2}\)`],0,R`\(\frac{(x+5)(3x^2+4x)-(x^3+2x^2-1)}{(x+5)^2}\). Numerator \(3x^3+19x^2+20x-x^3-2x^2+1\) (Example 3).`,{1:R`\(-(-1)=+1\).`,2:R`That's only the derivative of the top.`,3:R`Order: \(g f'-f g'\), not the reverse.`});
+MC('s24',2,R`If \(f(x)=\dfrac{x^2-1}{x^4+1}\), then \(f'(x)=\)`,[R`\(\dfrac{-2x^5+4x^3+2x}{(x^4+1)^2}\)`,R`\(\dfrac{2x^5+4x^3+2x}{(x^4+1)^2}\)`,R`\(\dfrac{2x}{4x^3}\)`,R`\(\dfrac{6x^5-4x^3+2x}{(x^4+1)^2}\)`],0,R`\(\frac{(x^4+1)(2x)-(x^2-1)(4x^3)}{(x^4+1)^2}=\frac{2x^5+2x-4x^5+4x^3}{(x^4+1)^2}\) (Example 4).`,{1:R`\(2x^5-4x^5=-2x^5\).`,2:R`\((f/g)'\neq f'/g'\).`,3:R`You added instead of subtracting \(fg'\).`});
+MC('s24',1,R`\(\left(\dfrac1g\right)'=\)`,[R`\(-\dfrac{g'}{g^2}\)`,R`\(\dfrac{1}{g'}\)`,R`\(\dfrac{g'}{g^2}\)`,R`\(-\dfrac1{g^2}\)`],0,R`From Table 2.4.1, with \(f=1\) in the quotient rule.`,{1:R`The derivative of a reciprocal isn't the reciprocal of the derivative.`,2:R`The quotient rule gives a minus sign.`,3:R`Don't forget the factor \(g'\).`});
+TF('s24',1,R`\((f\cdot g)'=f'\cdot g'\).`,false,R`Product rule: \((fg)'=f\cdot g'+g\cdot f'\).`,R`Try \(f=g=x\): \((x^2)'=2x\), but \(f'g'=1\).`);
+MC('s24',1,R`The quotient rule: \(\left(\dfrac fg\right)'=\)`,[R`\(\dfrac{g\,f'-f\,g'}{g^2}\)`,R`\(\dfrac{f\,g'-g\,f'}{g^2}\)`,R`\(\dfrac{f'}{g'}\)`,R`\(\dfrac{g\,f'+f\,g'}{g^2}\)`],0,R`"Low d-high minus high d-low, over low squared."`,{1:R`Reversed order flips the sign.`,2:R`That's not a rule.`,3:R`It's a minus, not a plus.`});
+
+/* 2.5 */
+MC('s25',1,R`\(\dfrac{d}{dx}(\csc x)=\)`,[R`\(-\csc x\cot x\)`,R`\(\csc x\cot x\)`,R`\(-\csc^2x\)`,R`\(\sec x\tan x\)`],0,R`From the table in 2.5. All the "co" functions have a minus.`,{1:R`Co-functions get a minus sign.`,2:R`\(-\csc^2x\) is the derivative of \(\cot x\).`,3:R`That's the derivative of \(\sec x\).`});
+MC('s25',1,R`\(\dfrac{d}{dx}(\sec x)=\)`,[R`\(\sec x\tan x\)`,R`\(\sec^2x\)`,R`\(-\sec x\tan x\)`,R`\(\tan^2x\)`],0,R`From the table in 2.5.`,{1:R`\(\sec^2x\) is the derivative of \(\tan x\).`,2:R`No minus for \(\sec\).`,3:R`Not a rule.`});
+MC('s25',1,R`If \(y=x\sin x\), then \(\frac{dy}{dx}=\)`,[R`\(x\cos x+\sin x\)`,R`\(\cos x\)`,R`\(x\cos x\)`,R`\(-x\cos x+\sin x\)`],0,R`Product rule: \(x\cdot\cos x+\sin x\cdot1\) (Example 1).`,{1:R`That's \(f'g'\).`,2:R`You forgot \(\sin x\cdot\frac{d}{dx}[x]\).`,3:R`\((\sin x)'=+\cos x\).`});
+MC('s25',2,R`If \(y=\dfrac{\sin x}{1+\cos x}\), then \(\frac{dy}{dx}=\)`,[R`\(\dfrac{1}{1+\cos x}\)`,R`\(\dfrac{\cos x}{-\sin x}\)`,R`\(\dfrac{\cos x-1}{(1+\cos x)^2}\)`,R`\(\dfrac{-1}{1+\cos x}\)`],0,R`\(\frac{(1+\cos x)\cos x+\sin^2x}{(1+\cos x)^2}=\frac{\cos x+1}{(1+\cos x)^2}=\frac{1}{1+\cos x}\), using \(\sin^2+\cos^2=1\) (Example 2).`,{1:R`\((f/g)'\neq f'/g'\).`,2:R`\(-\sin x\cdot(-\sin x)=+\sin^2x\). Watch the signs.`,3:R`The numerator is positive: \(\cos x+1\).`});
+MC('s25',3,R`If \(f(x)=\sec x\), then \(f''\!\left(\frac\pi4\right)=\)`,[R`\(3\sqrt2\)`,R`\(2\sqrt2\)`,R`\(\sqrt2\)`,'3'],0,R`\(f''=\sec^3x+\sec x\tan^2x\). At \(\frac\pi4\): \((\sqrt2)^3+\sqrt2(1)=2\sqrt2+\sqrt2=3\sqrt2\) (Example 3).`,{1:R`You forgot the \(\sec x\tan^2x\) term.`,2:R`That's only the second term.`,3:R`\(\sec\frac\pi4=\sqrt2\), not 1.`});
+MC('s25',1,R`\(\sec\!\left(\frac\pi4\right)=\)`,[R`\(\sqrt2\)`,R`\(\frac{\sqrt2}2\)`,'1','2'],0,R`\(\cos\frac\pi4=\frac{1}{\sqrt2}\), so \(\sec\frac\pi4=\sqrt2\).`,{1:R`That's \(\cos\frac\pi4\).`,2:R`That's \(\tan\frac\pi4\).`,3:R`\(\sec^2\frac\pi4=2\), not \(\sec\).`});
+TF('s25',1,R`\(\dfrac{d}{dx}(\cot x)=-\csc^2x\).`,true,R`From the table in 2.5.`,R`It's in the table: \(-\csc^2x\).`);
+TF('s25',1,R`\(\dfrac{d}{dx}(\cos x)=\sin x\).`,false,R`\((\cos x)'=-\sin x\).`,R`There's a minus sign: \(-\sin x\).`);
+
+QB.forEach((q,i)=>q.id=q.t+'-'+i);
+const QBY=Object.fromEntries(QB.map(q=>[q.id,q]));
+
+/* ===== Worked steps (every example in the notes) ===== */
+const W=[];
+function WK(t,ex,q,hint,steps,ans,note){W.push({t,ex,q,hint,steps,ans,note});}
+WK('s11','Ex 4',R`Explain why \(\displaystyle\lim_{x\to0}\frac{|x|}{x}\) does not exist.`,R`Split \(|x|\) by sign.`,[R`From the right (\(x>0\)): \(|x|=x\), so \(\lim_{x\to0^+}\frac{x}{x}=1\).`,R`From the left (\(x<0\)): \(|x|=-x\), so \(\lim_{x\to0^-}\frac{-x}{x}=-1\).`,R`\(1\neq-1\), so the two-sided limit does not exist.`],DNE);
+WK('s11','Ex 5',R`A graph rises to an open circle at height 1 from the left of \(a\), and starts at an open circle at height 3 to the right (a dot may be at height 2). Find the one- and two-sided limits at \(a\).`,'Read the left branch, then the right branch. Ignore the dot.',[R`\(\lim_{x\to a^-}f(x)=1\)`,R`\(\lim_{x\to a^+}f(x)=3\)`,R`\(1\neq3\), so \(\lim_{x\to a}f(x)\) does not exist, for all three graphs in Fig 1.1.13.`],DNE);
+WK('s11','Ex 6',R`A triangle-shaped graph peaks at height 2 at \(x=a\) (with a hole, a hole plus a dot at 3, or a solid point). Find the limits at \(a\).`,R`Where is the curve heading from each side?`,[R`From the left the curve approaches 2.`,R`From the right the curve approaches 2.`,R`They agree, so \(\lim_{x\to a}f(x)=2\) in all three graphs. The value \(f(a)\) doesn't matter.`],'2');
+WK('s11','Ex 7',R`Describe the limits at \(x=a\) for (a) \(\frac{1}{x-a}\), (b) \(\frac{1}{(x-a)^2}\), (c) \(\frac{-1}{x-a}\), (d) \(\frac{-1}{(x-a)^2}\).`,R`Find the sign of the denominator on each side.`,[R`(a) \(x\to a^+\): \(+\infty\). \(x\to a^-\): \(-\infty\).`,R`(b) Squared denominator is positive on both sides, so \(+\infty\) on both sides and \(\lim_{x\to a}=+\infty\).`,R`(c) \(x\to a^+\): \(-\infty\). \(x\to a^-\): \(+\infty\).`,R`(d) Both sides \(-\infty\), so \(\lim_{x\to a}=-\infty\).`],'See each part');
+WK('s12','Ex 5',R`Find \(\displaystyle\lim_{x\to5}(x^2-4x+3)\).`,'Use the limit laws, or just substitute (it is a polynomial).',[R`\(=\lim x^2-4\lim x+\lim3\)`,R`\(=5^2-4(5)+3\)`,R`\(=25-20+3=8\)`],'8');
+WK('s12','Ex 6',R`Find \(\displaystyle\lim_{x\to1}(x^7-2x^5+1)^{35}\).`,'Find the limit of the inside first.',[R`\(=\left(\lim_{x\to1}(x^7-2x^5+1)\right)^{35}\)`,R`\(=(1-2+1)^{35}\)`,R`\(=0^{35}=0\)`],'0');
+WK('s12','Ex 7',R`Find \(\displaystyle\lim_{x\to2}\frac{5x^3+4}{x-3}\).`,'Is the denominator 0 at x = 2?',[R`Denominator: \(2-3=-1\neq0\), so we can substitute.`,R`\(\frac{5(2)^3+4}{2-3}=\frac{40+4}{-1}\)`,R`\(=-44\)`],'−44');
+WK('s12','Ex 8',R`Find \(\displaystyle\lim_{x\to4^\pm}\frac{2-x}{(x-4)(x+2)}\) and \(\displaystyle\lim_{x\to4}\).`,R`Substituting gives \(\frac{-2}{0}\). Use a sign chart.`,[R`Substitute: \(\frac{-2}{0}\), so the answer is \(\pm\infty\). We need the sign.`,R`Zeros of top and bottom: \(x=-2,2,4\). Test a number in each interval to get the sign of the whole fraction.`,R`Just right of 4 (e.g. 4.1): \(\frac{-}{(+)(+)}<0\), so \(\lim_{x\to4^+}=-\infty\).`,R`Just left of 4 (e.g. 3.9): \(\frac{-}{(-)(+)}>0\), so \(\lim_{x\to4^-}=+\infty\).`,R`The sides differ, so \(\lim_{x\to4}\) does not exist.`],R`\(-\infty\), \(+\infty\), DNE`);
+WK('s12','Ex 9a',R`Find \(\displaystyle\lim_{x\to3}\frac{x^2-6x+9}{x-3}\).`,R`\(\frac00\), so factor.`,[R`Substitute: \(\frac00\).`,R`\(x^2-6x+9=(x-3)^2\)`,R`\(\lim\frac{(x-3)^2}{x-3}=\lim(x-3)=0\)`],'0');
+WK('s12','Ex 9b',R`Find \(\displaystyle\lim_{x\to-4}\frac{2x+8}{x^2+x-12}\).`,'Factor top and bottom.',[R`Substitute: \(\frac00\).`,R`\(\frac{2(x+4)}{(x+4)(x-3)}=\frac{2}{x-3}\)`,R`\(\frac{2}{-4-3}=-\frac27\)`],R`\(-\frac27\)`);
+WK('s12','Ex 9c',R`Find \(\displaystyle\lim_{x\to5}\frac{x^2-3x-10}{x^2-10x+25}\).`,'Factor, cancel, then check the signs.',[R`Substitute: \(\frac00\).`,R`\(\frac{(x-5)(x+2)}{(x-5)(x-5)}=\frac{x+2}{x-5}\)`,R`Now \(\frac{7}{0}\): from the right \(x-5>0\), so \(+\infty\). From the left, \(-\infty\).`,R`Sides differ, so the limit does not exist.`],DNE);
+WK('s12','Ex 10',R`Find \(\displaystyle\lim_{x\to1}\frac{x-1}{\sqrt x-1}\).`,'There\'s a radical. Multiply by the conjugate.',[R`Substitute: \(\frac00\).`,R`Multiply by \(\frac{\sqrt x+1}{\sqrt x+1}\): the denominator becomes \(x-1\).`,R`\(\frac{(x-1)(\sqrt x+1)}{x-1}=\sqrt x+1\)`,R`\(\sqrt1+1=2\)`],'2');
+WK('s12','Ex 11',R`\(f(x)=\begin{cases}\frac{1}{x+2}, & x<-2\\ x^2-5, & -2<x\le3\\ \sqrt{x+13}, & x>3\end{cases}\) Find \(\lim f\) as \(x\to-2,\ 0,\ 3\).`,'At a break point, use the left piece for the left limit and the right piece for the right limit.',[R`(a) Left of −2: \(\frac{1}{0^-}=-\infty\). Right of −2: \(4-5=-1\). DNE.`,R`(b) \(x=0\) is inside the middle piece: \(0-5=-5\).`,R`(c) Left of 3: \(9-5=4\). Right of 3: \(\sqrt{16}=4\). Equal, so the limit is 4.`],R`DNE, \(-5\), \(4\)`);
+WK('s13','Ex 2',R`Find \(\lim_{x\to\pm\infty}\tan^{-1}x\) and the horizontal asymptotes.`,'Look at Figure 1.3.3.',[R`\(\lim_{x\to+\infty}\tan^{-1}x=\frac\pi2\)`,R`\(\lim_{x\to-\infty}\tan^{-1}x=-\frac\pi2\)`,R`So \(y=\frac\pi2\) is a horizontal asymptote in the positive direction and \(y=-\frac\pi2\) in the negative direction.`],R`\(\pm\frac\pi2\)`);
+WK('s13','Ex 3',R`Find \(\lim_{x\to\pm\infty}\left(1+\frac1x\right)^x\).`,'Look at Figure 1.3.4.',[R`\(\lim_{x\to+\infty}(1+\frac1x)^x=e\)`,R`\(\lim_{x\to-\infty}(1+\frac1x)^x=e\)`,R`\(y=e\) is a horizontal asymptote in both directions.`],'e');
+WK('s13','Ex 4b',R`Find \(\displaystyle\lim_{x\to+\infty}\left(1+\frac1{2x}\right)^x\).`,R`Make the exponent match the \(2x\) inside.`,[R`\(\left(1+\frac{1}{2x}\right)^x=\left[\left(1+\frac{1}{2x}\right)^{2x}\right]^{1/2}\)`,R`The inside \(\to e\) (let \(u=2x\)).`,R`So the limit is \(e^{1/2}=\sqrt e\).`],R`\(\sqrt e\)`);
+WK('s13','Ex 5',R`Find \(\lim_{x\to\pm\infty}2x^5\) and \(\lim_{x\to\pm\infty}(-7x^6)\).`,'Odd vs even power, then the sign of the coefficient.',[R`\(2(+\infty)^5=+\infty\); \(2(-\infty)^5=-\infty\) (odd power).`,R`\(-7(+\infty)^6=-\infty\); \(-7(-\infty)^6=-7(+\infty)=-\infty\) (even power).`],'see steps');
+WK('s13','Ex 6',R`Find \(\lim_{x\to-\infty}(7x^5-4x^3+2x-9)\) and \(\lim_{x\to-\infty}(-4x^8+17x^3-5x+1)\).`,'Keep only the highest-degree term.',[R`\(\lim(7x^5)=7(-\infty)=-\infty\)`,R`\(\lim(-4x^8)=-4(+\infty)=-\infty\)`],R`\(-\infty\), \(-\infty\)`);
+WK('s13','Ex 7',R`Find \(\displaystyle\lim_{x\to+\infty}\frac{3x+5}{6x-8}\).`,R`Divide every term by the highest power in the denominator, \(x\).`,[R`\(\frac{3+\frac5x}{6-\frac8x}\)`,R`\(\frac5x\to0\) and \(\frac8x\to0\).`,R`\(\frac{3+0}{6-0}=\frac12\)`],R`\(\frac12\)`);
+WK('s13','Ex 8a',R`Find \(\displaystyle\lim_{x\to-\infty}\frac{4x^2-x}{2x^3-5}\).`,R`Divide by \(x^3\).`,[R`\(\frac{\frac4x-\frac1{x^2}}{2-\frac5{x^3}}\)`,R`\(\frac{0-0}{2-0}=0\)`],'0');
+WK('s13','Ex 8b',R`Find \(\displaystyle\lim_{x\to+\infty}\frac{5x^3-2x^2+1}{1-3x}\).`,R`Divide by \(x^3\), or use the quick method.`,[R`Dividing by \(x^3\): \(\frac{5-\frac2x+\frac1{x^3}}{\frac1{x^3}-\frac3x}\to\frac{5}{0^-}\), so it's unbounded.`,R`Quick method: \(\frac{5x^3}{-3x}=-\frac53x^2\)`,R`\(\to-\infty\)`],R`\(-\infty\)`);
+WK('s13','Ex 9',R`Use the quick method on Examples 7 and 8.`,'Top term ÷ bottom term only.',[R`\(\frac{3x}{6x}=\frac12\)`,R`\(\frac{4x^2}{2x^3}=\frac2x\to0\)`,R`\(\frac{5x^3}{-3x}=-\frac53x^2\to-\infty\)`],R`\(\frac12\), \(0\), \(-\infty\)`,R`Your notes write \(\frac{4x^2}{2x^2}\) in the middle line; the bottom should be \(2x^3\). The answer 0 is still right.`);
+WK('s13','Ex 10a',R`Find \(\displaystyle\lim_{x\to+\infty}\frac{\sqrt{x^2+2}}{3x-6}\).`,R`Factor \(x^2\) out of the root: \(\sqrt{x^2}=|x|\).`,[R`\(\frac{\sqrt{x^2(1+\frac2{x^2})}}{x(3-\frac6x)}=\frac{|x|\sqrt{1+\frac2{x^2}}}{x(3-\frac6x)}\)`,R`\(x\to+\infty\), so \(x>0\) and \(|x|=x\). Cancel \(x\).`,R`\(\frac{\sqrt{1+0}}{3-0}=\frac13\)`],R`\(\frac13\)`);
+WK('s13','Ex 10b',R`Find \(\displaystyle\lim_{x\to-\infty}\frac{\sqrt{x^2+2}}{3x-6}\).`,R`Now \(x<0\). What is \(|x|\)?`,[R`Same factoring: \(\frac{|x|\sqrt{1+\frac2{x^2}}}{x(3-\frac6x)}\)`,R`\(x<0\), so \(|x|=-x\). Cancel \(x\), leaving a minus sign.`,R`\(\frac{-\sqrt{1}}{3}=-\frac13\)`],R`\(-\frac13\)`);
+WK('s13','Ex 11a',R`Find \(\displaystyle\lim_{x\to+\infty}\left(\sqrt{x^6+5}-x^3\right)\).`,R`\(\infty-\infty\) with a root, so multiply by the conjugate.`,[R`Multiply by \(\frac{\sqrt{x^6+5}+x^3}{\sqrt{x^6+5}+x^3}\).`,R`Top: \((x^6+5)-x^6=5\). So the expression is \(\frac{5}{\sqrt{x^6+5}+x^3}\).`,R`Divide by \(x^3\): \(\frac{5/x^3}{\sqrt{1+5/x^6}+1}\to\frac{0}{2}=0\)`],'0',R`In your notes, the second line has \(\sqrt{x^6+5}-x^3\) in the denominator. It should be \(+x^3\) (the conjugate). The next line corrects it.`);
+WK('s13','Ex 11b',R`Find \(\displaystyle\lim_{x\to+\infty}\left(\sqrt{x^6+5x^3}-x^3\right)\).`,'Conjugate again.',[R`Multiply by the conjugate: \(\frac{x^6+5x^3-x^6}{\sqrt{x^6+5x^3}+x^3}=\frac{5x^3}{\sqrt{x^6+5x^3}+x^3}\)`,R`Divide top and bottom by \(x^3\): \(\frac{5}{\sqrt{1+\frac5{x^3}}+1}\)`,R`\(\frac{5}{\sqrt{1+0}+1}=\frac52\)`],R`\(\frac52\)`,R`Your notes write the conjugate fraction with "−" in the first line; it should be \(\sqrt{x^6+5x^3}+x^3\) over itself.`);
+WK('s14','Ex 1',R`Use Definition 1.4.1 to prove \(\displaystyle\lim_{x\to2}(3x-5)=1\).`,R`Start from \(|f(x)-L|<\epsilon\) and work backwards to \(|x-2|\).`,[R`Let \(\epsilon>0\). We want \(|(3x-5)-1|<\epsilon\).`,R`\(|(3x-5)-1|=|3x-6|=3|x-2|\).`,R`\(3|x-2|<\epsilon\iff|x-2|<\frac\epsilon3\).`,R`Choose \(\delta=\frac\epsilon3\). If \(0<|x-2|<\delta\), then \(|(3x-5)-1|=3|x-2|<3\cdot\frac\epsilon3=\epsilon\). ∎`],R`\(\delta=\frac\epsilon3\)`,'The solution space in your 1.4 notes was empty, so these steps are the standard proof.');
+WK('s14','Ex 2',R`Prove \(\displaystyle\lim_{x\to0^+}\sqrt x=0\).`,R`One-sided: \(0<x<\delta\).`,[R`Let \(\epsilon>0\). We want \(|\sqrt x-0|=\sqrt x<\epsilon\).`,R`For \(x>0\): \(\sqrt x<\epsilon\iff x<\epsilon^2\).`,R`Choose \(\delta=\epsilon^2\). If \(0<x<\delta\), then \(\sqrt x<\sqrt{\epsilon^2}=\epsilon\). ∎`],R`\(\delta=\epsilon^2\)`,'The solution space in your 1.4 notes was empty, so these steps are the standard proof.');
+WK('s15','Ex 1',R`Is each continuous at \(x=2\)? \(f=\frac{x^2-4}{x-2}\); \(g\) = same with \(g(2)=3\); \(h\) = same with \(h(2)=4\).`,'Check the 3 conditions.',[R`\(\lim_{x\to2}\frac{x^2-4}{x-2}=\lim\frac{(x-2)(x+2)}{x-2}=\lim(x+2)=4\).`,R`\(f\): \(f(2)\) undefined, so not continuous.`,R`\(g\): \(g(2)=3\neq4\), so not continuous.`,R`\(h\): \(h(2)=4=\lim h\), so continuous.`],R`only \(h\)`);
+WK('s15','Ex 2',R`What can you say about the continuity of \(f(x)=\sqrt{9-x^2}\)?`,'Find the domain first.',[R`Domain: \(9-x^2\ge0\Rightarrow x^2\le9\Rightarrow|x|\le3\Rightarrow[-3,3]\).`,R`For \(c\in(-3,3)\): \(\lim_{x\to c}\sqrt{9-x^2}=\sqrt{9-c^2}=f(c)\), so continuous on \((-3,3)\).`,R`\(\lim_{x\to3^-}f=\sqrt{0}=0=f(3)\) and \(\lim_{x\to-3^+}f=0=f(-3)\).`,R`So \(f\) is continuous on \([-3,3]\).`],R`continuous on \([-3,3]\)`);
+WK('s15','Ex 3',R`For what values of \(x\) is \(y=\dfrac{x^2-9}{x^2-5x+6}\) discontinuous?`,'Rational function, so find where the denominator is 0.',[R`\(x^2-5x+6=0\)`,R`\((x-2)(x-3)=0\)`,R`\(x=2\) and \(x=3\): \(y\) is not continuous there.`],R`\(x=2,3\)`);
+WK('s15','Ex 4',R`Show that \(|x|\) is continuous everywhere.`,'Split into three cases.',[R`On \((-\infty,0)\): \(|x|=-x\), a polynomial, so continuous.`,R`On \((0,\infty)\): \(|x|=x\), a polynomial, so continuous.`,R`At 0: \(\lim_{x\to0^+}x=0\) and \(\lim_{x\to0^-}(-x)=0\), equal to \(|0|=0\).`,R`So \(|x|\) is continuous everywhere.`],'continuous everywhere');
+WK('s15','Comp.',R`If \(f(x)=\begin{cases}4, & x<0\\ x^2, & x\ge0\end{cases}\) and \(g(x)=\begin{cases}3-x, & x<1\\ 2x, & x\ge1\end{cases}\), find \(\displaystyle\lim_{x\to1}f(g(x))\).`,'Find the limit of g first.',[R`\(\lim_{x\to1^-}g=3-1=2\); \(\lim_{x\to1^+}g=2(1)=2\). So \(\lim g=2\).`,R`\(f\) is continuous at 2, so \(\lim f(g(x))=f(\lim g(x))=f(2)\).`,R`\(f(2)=2^2=4\)`],'4');
+WK('s15','Th 1.5.5',R`Find \(\displaystyle\lim_{x\to3}|5-x^2|\).`,R`\(|x|\) is continuous, so the limit passes inside.`,[R`\(\lim|5-x^2|=|\lim(5-x^2)|\)`,R`\(=|5-9|=|-4|\)`,R`\(=4\)`],'4');
+WK('s16','Ex 1',R`Find \(\displaystyle\lim_{x\to1}\cos\left(\frac{x^2-1}{x-1}\right)\).`,'cos is continuous, so move the limit inside.',[R`\(=\cos\left(\lim_{x\to1}\frac{x^2-1}{x-1}\right)\)`,R`\(=\cos\left(\lim\frac{(x-1)(x+1)}{x-1}\right)\)`,R`\(=\cos(\lim(x+1))=\cos2\)`],R`\(\cos2\)`);
+WK('s16','Ex 2a',R`Find \(\displaystyle\lim_{x\to0}\frac{\tan x}{x}\).`,R`Write \(\tan x=\frac{\sin x}{\cos x}\).`,[R`\(\frac00\). Rewrite: \(\frac{\sin x}{x\cos x}\)`,R`\(=\frac1{\cos x}\cdot\frac{\sin x}{x}\)`,R`\(\to\frac11\cdot1=1\)`],'1');
+WK('s16','Ex 2b',R`Find \(\displaystyle\lim_{\theta\to0}\frac{\sin2\theta}{\theta}\).`,R`Make the denominator match the angle: \(2\theta\).`,[R`Multiply and divide by 2: \(2\cdot\frac{\sin2\theta}{2\theta}\)`,R`\(=2\cdot1=2\)`],'2');
+WK('s16','Ex 2c',R`Find \(\displaystyle\lim_{x\to0}\frac{\sin3x}{\sin5x}\).`,R`Divide top and bottom by \(x\), then match angles.`,[R`\(\frac{\frac{\sin3x}{x}}{\frac{\sin5x}{x}}=\frac{3\cdot\frac{\sin3x}{3x}}{5\cdot\frac{\sin5x}{5x}}\)`,R`\(=\frac35\cdot\frac{1}{1}=\frac35\)`],R`\(\frac35\)`);
+WK('s16','Squeeze 1',R`If \(8-x^3\le f(x)\le8+x^3\), find \(\lim_{x\to0}f(x)\).`,'Take the limit of both bounds.',[R`\(\lim(8-x^3)=8\) and \(\lim(8+x^3)=8\).`,R`\(8\le\lim f\le8\)`,R`So \(\lim_{x\to0}f(x)=8\).`],'8');
+WK('s16','Squeeze 2',R`If \(5x+2\le f(x)\le x^2+8\), find \(\lim_{x\to2}f(x)\).`,'Substitute x = 2 into both bounds.',[R`\(5(2)+2=12\) and \(2^2+8=12\).`,R`\(12\le\lim f\le12\), so the limit is 12.`],'12');
+WK('s16','Squeeze 3',R`Find \(\displaystyle\lim_{x\to0}x\sin x\).`,'Bound sin x between −1 and 1.',[R`\(-1\le\sin x\le1\)`,R`Multiply by \(|x|\ge0\): \(-|x|\le x\sin x\le|x|\)`,R`\(\lim(-|x|)=0=\lim|x|\), so \(\lim x\sin x=0\). (Direct substitution also gives \(0\cdot0\).)`],'0',R`Your notes multiply by \(x\) and write \(-x\le x\sin x\le x\), which flips for \(x<0\). Multiplying by \(|x|\) fixes it, and the answer stays 0.`);
+WK('s16','Squeeze 4',R`Find \(\displaystyle\lim_{x\to0}x^3\cos\left(\frac1x\right)\).`,'Same idea with |x|³.',[R`\(-1\le\cos\frac1x\le1\)`,R`\(-|x|^3\le x^3\cos\frac1x\le|x|^3\)`,R`Both bounds → 0, so the limit is 0.`],'0',R`Your notes use \(-x^3\le\ldots\le x^3\), which only holds for \(x>0\). Use \(|x|^3\).`);
+WK('s16','Ex 3b',R`Find \(\displaystyle\lim_{x\to0}x\sin\left(\frac1x\right)\).`,'Squeeze.',[R`\(-1\le\sin\frac1x\le1\)`,R`\(-|x|\le x\sin\frac1x\le|x|\)`,R`Both bounds → 0, so the limit is 0.`],'0',R`Same note: use \(|x|\) instead of \(x\) for the bounds.`);
+WK('s21','Ex 1',R`Find the tangent line to \(y=x^2\) at \(P(1,1)\) using Definition 2.1.1.`,R`\(m_{\tan}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}\)`,[R`\(m=\lim_{x\to1}\frac{x^2-1}{x-1}=\lim\frac{(x-1)(x+1)}{x-1}=\lim(x+1)=2\)`,R`\(y-1=2(x-1)\)`,R`\(y=2x-1\)`],R`\(y=2x-1\)`);
+WK('s21','Ex 2',R`Compute the slope in Example 1 with the \(h\)-form.`,R`\(m=\lim_{h\to0}\frac{f(1+h)-f(1)}{h}\)`,[R`\(=\lim\frac{(1+h)^2-1}{h}=\lim\frac{1+2h+h^2-1}{h}\)`,R`\(=\lim\frac{h(2+h)}{h}=\lim(2+h)\)`,R`\(=2\)`],'2');
+WK('s21','Ex 3',R`Find the tangent line to \(y=\frac2x\) at \((2,1)\).`,R`Combine the fractions in the numerator.`,[R`\(m=\lim_{h\to0}\frac{\frac{2}{2+h}-1}{h}=\lim\frac{\frac{2-2-h}{2+h}}{h}\)`,R`\(=\lim\frac{-h}{(2+h)h}=\lim\frac{-1}{2+h}=-\frac12\)`,R`\(y-1=-\frac12(x-2)\Rightarrow y=-\frac12x+1+1\)`,R`\(y=-\frac12x+2\)`],R`\(y=-\frac12x+2\)`,R`Your notes' last line reads \(y=-\frac12+2\); the \(x\) is missing. It should be \(y=-\frac12x+2\).`);
+WK('s21','Ex 4',R`Find the slopes of the tangent lines to \(y=\sqrt x\) at \(x_0=1,4,9\).`,'Conjugate in the h-form.',[R`\(m=\lim_{h\to0}\frac{\sqrt{x_0+h}-\sqrt{x_0}}{h}\cdot\frac{\sqrt{x_0+h}+\sqrt{x_0}}{\sqrt{x_0+h}+\sqrt{x_0}}\)`,R`\(=\lim\frac{h}{h(\sqrt{x_0+h}+\sqrt{x_0})}=\frac{1}{2\sqrt{x_0}}\)`,R`\(x_0=1:\ \frac12\); \(x_0=4:\ \frac14\); \(x_0=9:\ \frac16\)`],R`\(\frac12,\frac14,\frac16\)`);
+WK('s23','Ex 4',R`Find \(\frac{d}{dx}[4x^8]\), \(\frac{d}{dx}[-x^{12}]\), \(\frac{d}{dx}[\frac\pi x]\).`,R`Constant multiple rule. Rewrite \(\frac1x=x^{-1}\).`,[R`\(4\cdot8x^7=32x^7\)`,R`\(-12x^{11}\)`,R`\(\pi\frac{d}{dx}[x^{-1}]=-\pi x^{-2}=-\frac{\pi}{x^2}\)`],'see steps');
+WK('s23','Ex 5a',R`Find \(\frac{d}{dx}[2x^6+x^{-9}]\).`,'Sum rule, then power rule.',[R`\(2\frac{d}{dx}[x^6]+\frac{d}{dx}[x^{-9}]\)`,R`\(=2(6x^5)+(-9)x^{-10}\)`,R`\(=12x^5-9x^{-10}\)`],R`\(12x^5-9x^{-10}\)`);
+WK('s23','Ex 5b',R`Find \(\frac{d}{dx}\left[\frac{\sqrt x-2x}{\sqrt x}\right]\).`,'Simplify before differentiating.',[R`\(\frac{\sqrt x}{\sqrt x}-\frac{2x}{\sqrt x}=1-2x^{1/2}\)`,R`\(\frac{d}{dx}[1-2x^{1/2}]=0-2\cdot\frac12x^{-1/2}\)`,R`\(=-x^{-1/2}=-\frac1{\sqrt x}\)`],R`\(-\frac1{\sqrt x}\)`);
+WK('s23','Ex 6',R`Find \(\frac{dy}{dx}\) if \(y=3x^8-2x^5+6x+1\).`,'Term by term.',[R`\(3(8x^7)-2(5x^4)+6(1)+0\)`,R`\(=24x^7-10x^4+6\)`],R`\(24x^7-10x^4+6\)`);
+WK('s23','Ex 9',R`Find all derivatives of \(f(x)=3x^4-2x^3+x^2-4x+2\).`,'Keep differentiating.',[R`\(f'=12x^3-6x^2+2x-4\)`,R`\(f''=36x^2-12x+2\)`,R`\(f'''=72x-12\)`,R`\(f^{(4)}=72\)`,R`\(f^{(n)}=0\) for \(n\ge5\)`],'see steps');
+WK('s24','Ex 1',R`Find \(\frac{dy}{dx}\) if \(y=(4x^2-1)(7x^3+x)\), two ways.`,'Method 1: product rule. Method 2: multiply first.',[R`Product rule: \((4x^2-1)(21x^2+1)+(8x)(7x^3+x)\)`,R`\(=84x^4+4x^2-21x^2-1+56x^4+8x^2\)`,R`\(=140x^4-9x^2-1\)`,R`Multiply first: \(y=28x^5-3x^3-x\), so \(y'=140x^4-9x^2-1\). Same answer.`],R`\(140x^4-9x^2-1\)`);
+WK('s24','Ex 2',R`Find \(\frac{ds}{dt}\) if \(s=(1+t)\sqrt t\).`,'Product rule with √t = t^(1/2).',[R`\((1+t)\cdot\frac{d}{dt}[t^{1/2}]+\frac{d}{dt}[1+t]\cdot t^{1/2}\)`,R`\(=(1+t)\cdot\frac12t^{-1/2}+t^{1/2}\)`,R`\(=\frac12t^{-1/2}+\frac12t^{1/2}+t^{1/2}=\frac12t^{-1/2}+\frac32t^{1/2}\)`],R`\(\frac{1}{2\sqrt t}+\frac32\sqrt t\)`,R`Your notes stop at \(\frac12t^{-1/2}+\frac12t^{1/2}+t^{1/2}\). Combining the last two terms gives \(\frac32t^{1/2}\).`);
+WK('s24','Ex 3',R`Find \(y'\) for \(y=\dfrac{x^3+2x^2-1}{x+5}\).`,'Quotient rule.',[R`\(y'=\frac{(x+5)(3x^2+4x)-(x^3+2x^2-1)(1)}{(x+5)^2}\)`,R`Expand: \(3x^3+19x^2+20x-x^3-2x^2+1\)`,R`\(y'=\frac{2x^3+17x^2+20x+1}{(x+5)^2}\)`],R`\(\frac{2x^3+17x^2+20x+1}{(x+5)^2}\)`);
+WK('s24','Ex 4',R`Find \(f'(x)\) for \(f(x)=\dfrac{x^2-1}{x^4+1}\).`,'Quotient rule.',[R`\(\frac{(x^4+1)(2x)-(x^2-1)(4x^3)}{(x^4+1)^2}\)`,R`\(=\frac{2x^5+2x-4x^5+4x^3}{(x^4+1)^2}\)`,R`\(=\frac{-2x^5+4x^3+2x}{(x^4+1)^2}\)`],R`\(\frac{-2x^5+4x^3+2x}{(x^4+1)^2}\)`);
+WK('s25','Ex 1',R`Find \(\frac{dy}{dx}\) if \(y=x\sin x\).`,'Product rule.',[R`\(x\cdot\frac{d}{dx}[\sin x]+\sin x\cdot\frac{d}{dx}[x]\)`,R`\(=x\cos x+\sin x\)`],R`\(x\cos x+\sin x\)`);
+WK('s25','Ex 2',R`Find \(\frac{dy}{dx}\) if \(y=\dfrac{\sin x}{1+\cos x}\).`,R`Quotient rule, then \(\sin^2x+\cos^2x=1\).`,[R`\(\frac{(1+\cos x)\cos x-\sin x(-\sin x)}{(1+\cos x)^2}\)`,R`\(=\frac{\cos x+\cos^2x+\sin^2x}{(1+\cos x)^2}=\frac{\cos x+1}{(1+\cos x)^2}\)`,R`\(=\frac{1}{1+\cos x}\)`],R`\(\frac{1}{1+\cos x}\)`,R`Your notes stop at \(\frac{\cos x+1}{(1+\cos x)^2}\). One factor cancels, giving \(\frac{1}{1+\cos x}\).`);
+WK('s25','Ex 3',R`Find \(f''(\pi/4)\) if \(f(x)=\sec x\).`,'Differentiate sec x tan x with the product rule.',[R`\(f'=\sec x\tan x\)`,R`\(f''=\sec x\cdot\sec^2x+\tan x\cdot\sec x\tan x=\sec^3x+\sec x\tan^2x\)`,R`\(\sec\frac\pi4=\sqrt2,\ \tan\frac\pi4=1\)`,R`\((\sqrt2)^3+\sqrt2(1)=2\sqrt2+\sqrt2=3\sqrt2\)`],R`\(3\sqrt2\)`);
+
+/* ===== Next step? (choose the move) ===== */
+const NS=[
+ {t:'s12',q:R`\(\displaystyle\lim_{x\to3}\frac{x^2-6x+9}{x-3}\)`,st:[
+  {p:'What is the first move?',o:['Substitute x = 3','Divide by the highest power of x','Use the squeeze theorem'],a:0,why:'Always substitute first and see what form you get.'},
+  {p:R`You got \(\frac00\). Next?`,o:['Factor the numerator','Answer: 0','Answer: does not exist'],a:0,why:R`\(\frac00\) means simplify. \(x^2-6x+9=(x-3)^2\).`},
+  {p:R`After cancelling: \(\lim(x-3)\). Answer?`,o:['0','6','−3'],a:0,why:'3 − 3 = 0.'}]},
+ {t:'s12',q:R`\(\displaystyle\lim_{x\to1}\frac{x-1}{\sqrt x-1}\)`,st:[
+  {p:R`Substituting gives \(\frac00\), and there's a radical. Next?`,o:[R`Multiply by \(\frac{\sqrt x+1}{\sqrt x+1}\)`,'Divide by x',R`Square the whole fraction`],a:0,why:'A radical with 0/0 calls for the conjugate.'},
+  {p:R`The bottom becomes \(x-1\). What's left after cancelling?`,o:[R`\(\sqrt x+1\)`,R`\(\sqrt x-1\)`,R`\(\frac{1}{\sqrt x+1}\)`],a:0,why:R`\(\frac{(x-1)(\sqrt x+1)}{x-1}\).`},
+  {p:'Answer?',o:['2','1/2','1'],a:0,why:R`\(\sqrt1+1=2\).`}]},
+ {t:'s12',q:R`\(\displaystyle\lim_{x\to4^+}\frac{2-x}{(x-4)(x+2)}\)`,st:[
+  {p:'Substitute. What form?',o:[R`\(\frac{-2}{0}\)`,R`\(\frac00\)`,'a number'],a:0,why:R`Top \(2-4=-2\), bottom \(0\cdot6=0\).`},
+  {p:R`\(\frac{k}{0}\) means \(\pm\infty\). How do you get the sign?`,o:['Sign of (x−4)(x+2) just right of 4','Factor and cancel','Divide by x²'],a:0,why:R`Test \(x=4.1\): \((+)(+)>0\), so the bottom is \(0^+\).`},
+  {p:R`\(\frac{-2}{0^+}=\)?`,o:[R`\(-\infty\)`,R`\(+\infty\)`,'0'],a:0,why:'Negative over a tiny positive.'}]},
+ {t:'s13',q:R`\(\displaystyle\lim_{x\to+\infty}\frac{3x+5}{6x-8}\)`,st:[
+  {p:'First move?',o:['Divide every term by x','Substitute x = ∞','Multiply by the conjugate'],a:0,why:'Divide by the highest power of x in the denominator.'},
+  {p:R`You have \(\frac{3+5/x}{6-8/x}\). What happens to \(\frac5x\)?`,o:['→ 0','→ 5','→ ∞'],a:0,why:R`\(\frac{c}{x}\to0\).`},
+  {p:'Answer?',o:['1/2','2','−5/8'],a:0,why:R`\(\frac36\).`}]},
+ {t:'s13',q:R`\(\displaystyle\lim_{x\to+\infty}\left(\sqrt{x^6+5x^3}-x^3\right)\)`,st:[
+  {p:R`Form: \(\infty-\infty\). Next?`,o:['Multiply by the conjugate','Answer: 0','Factor x³ from the root right away and stop'],a:0,why:R`\(\infty-\infty\) is indeterminate; the conjugate turns it into a fraction.`},
+  {p:'The numerator becomes?',o:[R`\(5x^3\)`,R`\(2x^6+5x^3\)`,'5'],a:0,why:R`\((x^6+5x^3)-x^6\).`},
+  {p:R`Divide by \(x^3\): \(\frac{5}{\sqrt{1+5/x^3}+1}\). Answer?`,o:['5/2','5','0'],a:0,why:R`\(\frac{5}{1+1}\).`}]},
+ {t:'s16',q:R`\(\displaystyle\lim_{x\to0}\frac{\sin3x}{\sin5x}\)`,st:[
+  {p:'First move?',o:['Divide top and bottom by x','Substitute x = 0 and answer 0/0','Use the quotient rule'],a:0,why:R`We want the \(\frac{\sin u}{u}\) pattern.`},
+  {p:R`To use \(\frac{\sin3x}{3x}\to1\) you need…`,o:['to multiply and divide by 3','x → 3','to square it'],a:0,why:R`\(\frac{\sin3x}{x}=3\cdot\frac{\sin3x}{3x}\).`},
+  {p:'Answer?',o:['3/5','5/3','1'],a:0,why:R`\(\frac{3\cdot1}{5\cdot1}\).`}]},
+ {t:'s16',q:R`\(\displaystyle\lim_{x\to0}x\sin\left(\frac1x\right)\)`,st:[
+  {p:'Which tool?',o:['Squeeze theorem',R`\(\frac{\sin u}{u}\to1\)`,'Factor'],a:0,why:R`\(\frac1x\to\infty\), so \(\frac{\sin u}{u}\) doesn't apply. \(\sin\) is bounded, so squeeze.`},
+  {p:'Correct bounds?',o:[R`\(-|x|\le x\sin\frac1x\le|x|\)`,R`\(-x\le x\sin\frac1x\le x\)`,R`\(-1\le x\sin\frac1x\le1\)`],a:0,why:R`Multiplying by \(x\) flips the inequality for \(x<0\); \(|x|\) is safe.`},
+  {p:'Answer?',o:['0',DNE,'1'],a:0,why:'Both bounds → 0.'}]},
+ {t:'s21',q:R`Tangent line to \(y=x^2\) at \((1,1)\)`,st:[
+  {p:'What do you need first?',o:['The slope m at x = 1','The y-intercept','f″(1)'],a:0,why:'A line needs a point (given) and a slope.'},
+  {p:R`\(m=\lim_{x\to1}\frac{x^2-1}{x-1}=\)?`,o:['2','1','0'],a:0,why:R`\(\lim(x+1)=2\).`},
+  {p:'Equation?',o:[R`\(y=2x-1\)`,R`\(y=2x+1\)`,R`\(y=x+1\)`],a:0,why:R`\(y-1=2(x-1)\).`}]},
+ {t:'s24',q:R`\(y=\dfrac{x^3+2x^2-1}{x+5}\), find \(y'\)`,st:[
+  {p:'Which rule?',o:['Quotient rule','Power rule on top only','Product rule only'],a:0,why:'A fraction of two functions.'},
+  {p:'Numerator of the quotient rule?',o:[R`\((x+5)(3x^2+4x)-(x^3+2x^2-1)(1)\)`,R`\((x^3+2x^2-1)(1)-(x+5)(3x^2+4x)\)`,R`\((3x^2+4x)(1)\)`],a:0,why:'Low · d(high) − high · d(low).'},
+  {p:'Simplified numerator?',o:[R`\(2x^3+17x^2+20x+1\)`,R`\(2x^3+17x^2+20x-1\)`,R`\(4x^3+21x^2+20x-1\)`],a:0,why:R`\(3x^3+19x^2+20x-x^3-2x^2+1\).`}]},
+ {t:'s25',q:R`\(f(x)=\sec x\), find \(f''(\pi/4)\)`,st:[
+  {p:R`\(f'(x)=\)?`,o:[R`\(\sec x\tan x\)`,R`\(\sec^2x\)`,R`\(-\sec x\tan x\)`],a:0,why:'From the table.'},
+  {p:R`To differentiate \(\sec x\tan x\) you need…`,o:['the product rule','the quotient rule','nothing; it is constant'],a:0,why:'It is a product of two functions.'},
+  {p:R`\(f''=\sec^3x+\sec x\tan^2x\). At \(\frac\pi4\)?`,o:[R`\(3\sqrt2\)`,R`\(2\sqrt2\)`,'3'],a:0,why:R`\(2\sqrt2+\sqrt2\).`}]}
+];
+
+/* ===== Spot the mistake ===== */
+const SPOT=[
+ {t:'s16',src:'From your notes',title:R`\(\lim_{x\to0}x\sin\frac1x\)`,steps:[R`\(-1\le\sin\frac1x\le1\)`,R`Multiply by \(x\): \(-x\le x\sin\frac1x\le x\) for all \(x\neq0\)`,R`Both bounds → 0, so the limit is 0.`],bad:1,fix:R`For \(x<0\), multiplying by \(x\) flips the inequalities. Use \(-|x|\le x\sin\frac1x\le|x|\). The answer is still 0.`},
+ {t:'s21',src:'From your notes',title:R`Tangent to \(y=\frac2x\) at \((2,1)\), slope \(-\frac12\)`,steps:[R`\(y-1=-\frac12(x-2)\)`,R`\(y=-\frac12x+1+1\)`,R`\(y=-\frac12+2\)`],bad:2,fix:R`The \(x\) disappeared. It should be \(y=-\frac12x+2\).`},
+ {t:'s13',src:'From your notes',title:R`\(\lim_{x\to+\infty}(\sqrt{x^6+5}-x^3)\)`,steps:[R`Multiply by \(\frac{\sqrt{x^6+5}+x^3}{\sqrt{x^6+5}+x^3}\)`,R`\(=\lim\frac{x^6+5-x^6}{\sqrt{x^6+5}-x^3}\)`,R`\(=\lim\frac{5}{\sqrt{x^6+5}+x^3}=0\)`],bad:1,fix:R`The denominator must stay the conjugate \(\sqrt{x^6+5}+x^3\), not \(-x^3\).`},
+ {t:'s13',src:'Common trap',title:R`\(\lim_{x\to-\infty}\frac{\sqrt{x^2+2}}{3x-6}\)`,steps:[R`\(\sqrt{x^2+2}=\sqrt{x^2}\sqrt{1+\frac2{x^2}}\)`,R`\(\sqrt{x^2}=x\)`,R`So the limit is \(\frac13\).`],bad:1,fix:R`\(\sqrt{x^2}=|x|=-x\) for \(x<0\). The answer is \(-\frac13\).`},
+ {t:'s12',src:'Common trap',title:R`\(\lim_{x\to4^-}\frac{2-x}{(x-4)(x+2)}\)`,steps:[R`Substitute: numerator \(-2\), denominator \(0\).`,R`Negative over zero is \(-\infty\).`,R`So the limit is \(-\infty\).`],bad:1,fix:R`You need the sign of the denominator. From the left, \(x-4<0\), so it's \(0^-\) and \(\frac{-2}{0^-}=+\infty\).`},
+ {t:'s15',src:'Common trap',title:R`Where is \(\frac{x^2-9}{x^2-5x+6}\) discontinuous?`,steps:[R`\(\frac{(x-3)(x+3)}{(x-2)(x-3)}\)`,R`\(x-3\) cancels, so the only problem is \(x=2\).`,R`Discontinuous at \(x=2\) only.`],bad:1,fix:R`Cancelling doesn't make \(x=3\) part of the domain. The function is still undefined at 3, so it's discontinuous at 2 and 3.`},
+ {t:'s24',src:'Common trap',title:R`\(y=(4x^2-1)(7x^3+x)\), find \(y'\)`,steps:[R`\((4x^2-1)'=8x\)`,R`\((7x^3+x)'=21x^2+1\)`,R`\(y'=8x(21x^2+1)\)`],bad:2,fix:R`\((fg)'=fg'+gf'\), not \(f'g'\). The answer is \(140x^4-9x^2-1\).`},
+ {t:'s13',src:'Common trap',title:R`\(\lim_{x\to\infty}\left(1+\frac1x\right)^x\)`,steps:[R`\(\frac1x\to0\)`,R`So the base → 1, and \(1^{\text{anything}}=1\).`,R`The limit is 1.`],bad:1,fix:R`\(1^\infty\) is indeterminate. This limit is \(e\).`},
+ {t:'s23',src:'Common trap',title:R`\(\frac{d}{dx}\left[\frac{\sqrt x-2x}{\sqrt x}\right]\)`,steps:[R`\(=\frac{d}{dx}\left[1-\frac{2x}{\sqrt x}\right]\)`,R`\(=\frac{d}{dx}[1-2x]\)`,R`\(=-2\)`],bad:1,fix:R`\(\frac{2x}{\sqrt x}=2x^{1/2}\), not \(2x\). The answer is \(-\frac{1}{\sqrt x}\).`}
+];
+
+/* ===== Flashcards & match pools ===== */
+const CARDS=[
+ ['s11','When does \\(\\lim_{x\\to a}f(x)\\) exist?','Both one-sided limits exist and are equal.'],
+ ['s11',R`\(\lim_{x\to0^\pm}\frac1x\)`,R`\(+\infty\) from the right, \(-\infty\) from the left.`],
+ ['s12','0/0 after substituting?','Factor and cancel, or use the conjugate for radicals.'],
+ ['s12','k/0 after substituting (k ≠ 0)?','±∞ or DNE. Use a sign chart for each side.'],
+ ['s12','Piecewise limit at a break point?','Left piece for the left limit, right piece for the right limit.'],
+ ['s13',R`\(\lim_{x\to\pm\infty}\frac{c}{x^n}\)`,'0'],
+ ['s13',R`\(\lim_{x\to-\infty}x^n\)`,R`\(-\infty\) if n is odd, \(+\infty\) if n is even.`],
+ ['s13','Rational function at ±∞ (quick method)','Highest term on top ÷ highest term on bottom.'],
+ ['s13',R`\(\sqrt{x^2}\) as \(x\to-\infty\)`,R`\(|x|=-x\)`],
+ ['s13',R`\(\lim_{x\to\pm\infty}(1+\frac1x)^x\)`,'e'],
+ ['s13',R`\(\lim_{x\to\pm\infty}\tan^{-1}x\)`,R`\(\pm\frac\pi2\)`],
+ ['s14','ε–δ definition',R`∀ε>0 ∃δ>0: \(0<|x-a|<\delta\Rightarrow|f(x)-L|<\epsilon\)`],
+ ['s15','Three conditions for continuity at c',R`\(f(c)\) defined; \(\lim f\) exists; \(\lim f=f(c)\).`],
+ ['s15','Continuous on [a, b] means…','Continuous on (a, b), from the right at a, from the left at b.'],
+ ['s15',R`\(\lim f(g(x))\) when f is continuous`,R`\(f(\lim g(x))\)`],
+ ['s16',R`\(\lim_{x\to0}\frac{\sin x}{x}\)`,'1'],
+ ['s16',R`\(\lim_{x\to0}\frac{1-\cos x}{x}\)`,'0'],
+ ['s16','Squeeze theorem',R`\(g\le f\le h\), \(\lim g=\lim h=L\Rightarrow\lim f=L\)`],
+ ['s21','Tangent line at x₀',R`\(y-f(x_0)=m_{\tan}(x-x_0)\)`],
+ ['s21',R`\(m_{\tan}\) (h-form)`,R`\(\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}\)`],
+ ['s23',R`\(\frac{d}{dx}[x^r]\)`,R`\(rx^{r-1}\)`],
+ ['s23',R`\(\frac{d}{dx}[c]\)`,'0 (√2, π, −3 are constants!)'],
+ ['s24',R`\((fg)'\)`,R`\(fg'+gf'\)`],
+ ['s24',R`\(\left(\frac fg\right)'\)`,R`\(\frac{gf'-fg'}{g^2}\)`],
+ ['s24',R`\(\left(\frac1g\right)'\)`,R`\(-\frac{g'}{g^2}\)`],
+ ['s25',R`\((\sin x)',\ (\cos x)'\)`,R`\(\cos x,\ -\sin x\)`],
+ ['s25',R`\((\tan x)',\ (\cot x)'\)`,R`\(\sec^2x,\ -\csc^2x\)`],
+ ['s25',R`\((\sec x)',\ (\csc x)'\)`,R`\(\sec x\tan x,\ -\csc x\cot x\)`]
+];
+const MATCH={
+ 'Derivatives':[[R`\(x^4\)`,R`\(4x^3\)`],[R`\(\sin x\)`,R`\(\cos x\)`],[R`\(\cos x\)`,R`\(-\sin x\)`],[R`\(\tan x\)`,R`\(\sec^2x\)`],[R`\(\sec x\)`,R`\(\sec x\tan x\)`],[R`\(\cot x\)`,R`\(-\csc^2x\)`],[R`\(\csc x\)`,R`\(-\csc x\cot x\)`],[R`\(\sqrt x\)`,R`\(\frac1{2\sqrt x}\)`],[R`\(\frac1x\)`,R`\(-\frac1{x^2}\)`],[R`\(\pi\)`,'0'],[R`\(x\sin x\)`,R`\(x\cos x+\sin x\)`],[R`\(2x^6+x^{-9}\)`,R`\(12x^5-9x^{-10}\)`]],
+ 'Limits':[[R`\(\lim_{x\to0}\frac{\sin x}{x}\)`,'1'],[R`\(\lim_{x\to0}\frac{1-\cos x}{x}\)`,'0'],[R`\(\lim_{x\to\infty}\tan^{-1}x\)`,R`\(\frac\pi2\)`],[R`\(\lim_{x\to\infty}(1+\frac1x)^x\)`,'e'],[R`\(\lim_{\theta\to0}\frac{\sin2\theta}{\theta}\)`,'2'],[R`\(\lim_{x\to\infty}\frac{3x+5}{6x-8}\)`,R`\(\frac12\)`],[R`\(\lim_{x\to0}\frac{\sin3x}{\sin5x}\)`,R`\(\frac35\)`],[R`\(\lim_{x\to5}(x^2-4x+3)\)`,'8'],[R`\(\lim_{x\to3}|5-x^2|\)`,'4'],[R`\(\lim_{x\to\infty}(1+\frac1{2x})^x\)`,R`\(\sqrt e\)`],[R`\(\lim_{x\to2}\frac{5x^3+4}{x-3}\)`,'−44'],[R`\(\lim_{x\to-\infty}\frac{\sqrt{x^2+2}}{3x-6}\)`,R`\(-\frac13\)`]]
+};
+
+/* ===== Rules (night-before sheet) ===== */
+const RULES={
+ s11:[R`\(\lim_{x\to a}f=L\iff\lim_{x\to a^-}f=L=\lim_{x\to a^+}f\)`,R`Read limits from graphs by following the curve. Dots don't matter; \(f(a)\) is the solid dot.`,R`\(\frac1{x-a}\): \(+\infty\) right, \(-\infty\) left. \(\frac1{(x-a)^2}\): \(+\infty\) both sides.`],
+ s12:[R`Limit laws: sum, difference, product, quotient (\(L_2\ne0\)), root (\(L_1>0\) if n even).`,R`Polynomials: \(\lim p(x)=p(a)\).`,R`\(\frac00\): factor/cancel or conjugate. \(\frac k0\): sign chart → \(\pm\infty\) or DNE.`,R`Piecewise: one-sided limits at the break point.`],
+ s13:[R`\(\lim\frac{c}{x^n}=0\). \(\lim_{x\to-\infty}x^n\): odd → \(-\infty\), even → \(+\infty\).`,R`Polynomial at ±∞ behaves like its highest term.`,R`Rational at ±∞: highest top ÷ highest bottom.`,R`\(\sqrt{x^2}=|x|\): \(x\) at \(+\infty\), \(-x\) at \(-\infty\).`,R`\(\infty-\infty\) with a root → conjugate.`,R`\(\tan^{-1}x\to\pm\frac\pi2\); \((1+\frac1x)^x\to e\).`],
+ s14:[R`\(\forall\epsilon>0\ \exists\delta>0:\ 0<|x-a|<\delta\Rightarrow|f(x)-L|<\epsilon\).`,R`Linear \(mx+b\): \(\delta=\frac{\epsilon}{|m|}\). \(\sqrt x\) at \(0^+\): \(\delta=\epsilon^2\).`],
+ s15:[R`Continuous at c: \(f(c)\) defined, \(\lim f\) exists, they're equal.`,R`On \([a,b]\): continuous inside + right at a + left at b.`,R`Polynomials, |x|, sin, cos: everywhere. Rational: where denominator ≠ 0.`,R`\(\lim f(g(x))=f(\lim g(x))\) if f is continuous there. |continuous| is continuous.`],
+ s16:[R`\(\lim_{x\to0}\frac{\sin x}{x}=1,\ \lim_{x\to0}\frac{1-\cos x}{x}=0\).`,R`\(\frac{\tan x}{x}\to1\), \(\frac{\sin ax}{x}\to a\), \(\frac{\sin ax}{\sin bx}\to\frac ab\).`,R`Squeeze with \(-|x|^n\le x^n\cdot(\text{sin or cos})\le|x|^n\).`],
+ s21:[R`\(m_{\tan}=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}\).`,R`Tangent line: \(y-f(x_0)=m(x-x_0)\).`,R`\(\sqrt x\): \(m=\frac{1}{2\sqrt{x_0}}\).`],
+ s23:[R`\((c)'=0\), \((x^r)'=rx^{r-1}\), \((cf)'=cf'\), \((f\pm g)'=f'\pm g'\).`,R`Rewrite \(\frac1x=x^{-1}\), \(\sqrt x=x^{1/2}\). Simplify a single-term denominator first.`,R`A degree-n polynomial: \(f^{(n+1)}=0\).`],
+ s24:[R`\((fg)'=fg'+gf'\).`,R`\((\frac fg)'=\frac{gf'-fg'}{g^2}\), \((\frac1g)'=-\frac{g'}{g^2}\).`,R`You can multiply out first instead of using the product rule.`],
+ s25:[R`\((\sin)'=\cos,\ (\cos)'=-\sin,\ (\tan)'=\sec^2\).`,R`\((\csc)'=-\csc\cot,\ (\sec)'=\sec\tan,\ (\cot)'=-\csc^2\).`,R`\(\sin^2x+\cos^2x=1\) to simplify. \(\sec\frac\pi4=\sqrt2,\ \tan\frac\pi4=1\).`]
+};
+
+/* ===== Storage ===== */
+const store={get(k,d){try{const v=localStorage.getItem('calcnotes-'+k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem('calcnotes-'+k,JSON.stringify(v));}catch(e){}}};
+let solved=new Set(store.get('solved',[])), wrongs=new Set(store.get('wrongs',[])), stats=store.get('stats',{a:0,c:0}), best=store.get('best',0);
+function save(){store.set('solved',[...solved]);store.set('wrongs',[...wrongs]);store.set('stats',stats);store.set('best',best);refreshHeader();}
+
+const $=s=>document.querySelector(s); const app=$('#app');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function tex(el){const M=window.MathJax;if(M&&M.typesetPromise){try{M.typesetClear&&M.typesetClear([el]);}catch(e){}M.typesetPromise([el]).catch(()=>{});}}
+const tq=t=>QB.filter(q=>q.t===t);
+function pct(list){return list.length?Math.round(100*list.filter(q=>solved.has(q.id)).length/list.length):0;}
+function lvUnlocked(t,lv){if(lv===1)return true;return pct(tq(t).filter(q=>q.lv===lv-1))>=60;}
+function refreshHeader(){const p=Math.round(100*solved.size/QB.length);$('#ovTxt').textContent=p+'% solved';$('#ovBar').style.width=p+'%';$('#mCnt').textContent=wrongs.size||'';}
+let timerId=null; function clearTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+const LVN={1:'Easy',2:'Medium',3:'Hard'};
+
+const VIEWS={home,quiz,steps,nextstep,speed,match,exam,spot,cards,sheet,mistakes,ideas};
+function route(){clearTimer();const v=(location.hash||'#home').slice(1);const fn=VIEWS[v]||home;document.querySelectorAll('#tabs a').forEach(a=>a.classList.toggle('on',a.dataset.v===(VIEWS[v]?v:'home')));app.innerHTML='';const sec=document.createElement('section');sec.className='view';app.appendChild(sec);fn(sec);tex(sec);window.scrollTo(0,0);}
+window.addEventListener('hashchange',route);
+
+function home(el){
+  const acc=stats.a?Math.round(100*stats.c/stats.a):0;
+  el.innerHTML=`<div class="hero"><h2>Every example in your notes, <span class="mark">as practice</span></h2>
+  <p class="lede">${QB.length} quiz questions and ${W.length} worked examples from sections 1.1 – 2.5. Pick an answer and you'll see right away whether it's right, and why your choice was wrong.</p></div>
+  <div class="stats"><div class="stat"><b>${solved.size}<span class="muted" style="font-size:.9rem"> / ${QB.length}</span></b><span>questions solved</span></div>
+  <div class="stat"><b>${acc}%</b><span>accuracy over all attempts</span></div>
+  <div class="stat"><b>${best}</b><span>speed-round best</span></div></div>
+  <h3>Sections</h3>
+  <div class="topics">${Object.entries(TOPICS).map(([k,t])=>{const n=tq(k).length,p=pct(tq(k));return `<button class="topic" data-t="${k}"><span class="sec">§${t.sec}</span><h3>${t.n}</h3><p>${t.s}</p><div class="meta"><span>${n} questions · ${W.filter(w=>w.t===k).length} worked</span><span class="mono">${p}%</span></div><div class="bar"><i style="width:${p}%"></i></div></button>`}).join('')}</div>
+  <h3>Ways to study</h3>
+  <div class="modes">
+   <button class="mode" data-go="steps"><b>Worked steps</b><span>Every example from your notes. Hint first, then reveal one step at a time.</span></button>
+   <button class="mode" data-go="nextstep"><span class="new">NEW</span><b>Next step?</b><span>Choose the right move at each stage of a solution, not just the final answer.</span></button>
+   <button class="mode" data-go="speed"><span class="new">NEW</span><b>Speed round</b><span>60 seconds, as many as you can. Builds exam-pressure speed.</span></button>
+   <button class="mode" data-go="match"><span class="new">NEW</span><b>Match</b><span>Pair each function with its derivative, or each limit with its value.</span></button>
+   <button class="mode" data-go="exam"><b>Mock exam</b><span>15 mixed questions, 25 minutes, and a report on weak sections.</span></button>
+   <button class="mode" data-go="sheet"><span class="new">NEW</span><b>Night-before sheet</b><span>One page of rules, with the sections you missed most at the top.</span></button>
+  </div>`;
+  el.querySelectorAll('.topic').forEach(b=>b.onclick=()=>startQuiz({t:b.dataset.t}));
+  el.querySelectorAll('.mode').forEach(b=>b.onclick=()=>location.hash=b.dataset.go);
+}
+
+let pending=null;
+function startQuiz(o){pending=o;if(location.hash==='#quiz')route();else location.hash='quiz';}
+function quiz(el){
+  if(!pending){
+    el.innerHTML=`<h2>Quiz</h2><p class="lede">Choose a section and a level. Medium unlocks after 60% of Easy is solved, and Hard after 60% of Medium. That way you build up instead of jumping in at the deep end.</p>
+    <div class="card row" style="justify-content:space-between"><div><b>All sections, all levels</b><p class="muted" style="font-size:.88rem">${QB.length} questions shuffled</p></div><button class="btn pri" id="allq">Start</button></div>
+    <div class="view">${Object.entries(TOPICS).map(([k,t])=>`<div class="card row" style="justify-content:space-between"><div style="min-width:0"><span class="mono muted" style="font-size:.78rem">§${t.sec}</span><h3>${t.n}</h3></div>
+      <div class="lvls">${[1,2,3].map(lv=>{const L=tq(k).filter(q=>q.lv===lv);if(!L.length)return'';const un=lvUnlocked(k,lv);return `<button class="btn sm" data-t="${k}" data-lv="${lv}" ${un?'':'disabled title="Solve 60% of the previous level first"'}><span class="chip lv${lv}">${LVN[lv]}</span><span class="mono">${pct(L)}%</span>${un?'':' 🔒'}</button>`}).join('')}
+      <button class="btn sm ghost" data-t="${k}">All</button></div></div>`).join('')}</div>
+    <div class="row"><button class="btn ghost" id="tfOnly">True/False only</button><button class="btn ghost" id="unsolved">Unsolved only</button></div>`;
+    $('#allq').onclick=()=>startQuiz({t:'all'});
+    el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>startQuiz({t:b.dataset.t,lv:b.dataset.lv?+b.dataset.lv:0}));
+    $('#tfOnly').onclick=()=>startQuiz({ids:QB.filter(q=>q.type==='tf').map(q=>q.id),title:'True / False'});
+    $('#unsolved').onclick=()=>startQuiz({ids:QB.filter(q=>!solved.has(q.id)).map(q=>q.id),title:'Unsolved'});
+    return;
+  }
+  const o=pending;pending=null;
+  let list=o.ids?o.ids.map(i=>QBY[i]).filter(Boolean):QB.filter(q=>(o.t==='all'||q.t===o.t)&&(!o.lv||q.lv===o.lv));
+  list=shuffle(list);
+  if(!list.length){el.innerHTML=`<div class="card empty"><h3>Nothing here</h3><p class="muted">You've solved everything in this set.</p><a class="btn pri" href="#quiz">Back</a></div>`;return;}
+  const title=o.title||(o.t==='all'?'All sections':`§${TOPICS[o.t].sec} ${TOPICS[o.t].n}`+(o.lv?` · ${LVN[o.lv]}`:''));
+  runSession(el,list,{title});
+}
+
+function qCard(q,order){return `<div class="card prob"><div class="row"><span class="chip ${q.type==='tf'?'tf':''}">${q.type==='tf'?'True / False':'Multiple choice'}</span><span class="chip">§${TOPICS[q.t].sec}</span><span class="chip lv${q.lv}">${LVN[q.lv]}</span></div>
+ <div class="qtext">${q.q}</div><div class="opts ${q.type==='tf'?'tf':''}">${order.map((k,n)=>`<button class="opt" data-k="${k}"><span class="k">${q.type==='tf'?(k===0?'T':'F'):'ABCD'[n]}</span><span class="t">${q.o[k]}</span></button>`).join('')}</div><div class="fbx"></div></div>`;}
+function record(q,ok){stats.a++;if(ok){stats.c++;solved.add(q.id);wrongs.delete(q.id);}else wrongs.add(q.id);save();}
+function feedback(q,k,ok){return ok?`<div class="fb ok"><h4>Correct ✓</h4><div>${q.e}</div></div>`:`<div class="fb bad"><h4>Not quite ✗</h4>${q.w[k]?`<div><span class="lbl">What went wrong: </span>${q.w[k]}</div>`:''}<div><span class="lbl">Correct answer: </span>${q.o[q.a]}</div><div><span class="lbl">Why: </span>${q.e}</div><div class="muted" style="font-size:.85rem">Saved to My mistakes.</div></div>`;}
+
+function runSession(el,list,opts){
+  const res=[];let i=0;
+  el.innerHTML=`<div class="qhead"><h2>${opts.title}</h2><div class="row">${opts.timer?'<span class="timer" id="tmr"></span>':''}<span class="mono muted" id="qn"></span></div></div><div class="progress-dots" id="dots">${list.map(()=>'<i></i>').join('')}</div><div id="qbox"></div>`;
+  const dots=[...el.querySelectorAll('#dots i')];
+  if(opts.timer){let left=opts.timer;const tm=$('#tmr');const tick=()=>{tm.textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');tm.classList.toggle('low',left<=120);if(left--<=0){clearTimer();finish(true);}};tick();timerId=setInterval(tick,1000);}
+  function show(){const q=list[i];$('#qn').textContent=(i+1)+' / '+list.length;dots.forEach((d,k)=>d.classList.toggle('cur',k===i&&!res[k]));
+    const order=q.type==='tf'?[0,1]:shuffle(q.o.map((_,k)=>k));const box=$('#qbox');box.innerHTML=qCard(q,order);
+    box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q,+b.dataset.k,box));tex(box);}
+  function answer(q,k,box){const ok=k===q.a;box.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const kk=+b.dataset.k;if(kk===q.a)b.classList.add('ok');else if(kk===k)b.classList.add('bad');});
+    res[i]={q,ok};dots[i].classList.remove('cur');dots[i].classList.add(ok?'ok':'bad');record(q,ok);
+    const fb=box.querySelector('.fbx');const last=i===list.length-1;
+    fb.innerHTML=feedback(q,k,ok)+`<div class="row" style="margin-top:12px"><button class="btn pri" id="nx">${last?'See results':'Next question →'}</button></div>`;
+    $('#nx').onclick=()=>{if(last)finish();else{i++;show();window.scrollTo({top:0,behavior:'smooth'});}};$('#nx').focus({preventScroll:true});tex(fb);}
+  function finish(timeUp){clearTimer();const done=res.filter(Boolean);const c=done.filter(r=>r.ok).length;const n=list.length;const p=Math.round(100*c/n);
+    const byT={};list.forEach((q,k)=>{byT[q.t]=byT[q.t]||{c:0,n:0};byT[q.t].n++;if(res[k]&&res[k].ok)byT[q.t].c++;});
+    const weak=Object.entries(byT).filter(([,v])=>v.c/v.n<0.6).map(([k])=>'§'+TOPICS[k].sec);
+    const C=2*Math.PI*52,msg=p>=85?'Excellent. You\'re ready':p>=60?'Good, nearly there':'Let\'s review a bit more';
+    el.innerHTML=`<div class="card result">${timeUp?'<span class="chip tf">Time\'s up</span>':''}
+     <svg class="ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--grid)" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 60 60)"/><text x="60" y="68" text-anchor="middle" font-size="26">${p}%</text></svg>
+     <h2>${msg}</h2><p class="muted">${c} correct out of ${n}</p>
+     <div class="breakdown">${Object.entries(byT).map(([k,v])=>`<div class="r"><span>§${TOPICS[k].sec} ${TOPICS[k].n}</span><div class="bar"><i style="width:${100*v.c/v.n}%"></i></div><span class="mono">${v.c}/${v.n}</span></div>`).join('')}</div>
+     ${weak.length?`<p>Focus on <span class="mark">${weak.join(', ')}</span>: open their worked steps, then retry.</p>`:''}
+     <div class="row" style="justify-content:center">${done.some(r=>!r.ok)?'<button class="btn pri" id="again">Retry the ones I missed</button>':''}<a class="btn" href="#steps">Worked steps</a><a class="btn" href="#home">Home</a></div></div>`;
+    const ag=$('#again');if(ag)ag.onclick=()=>startQuiz({ids:done.filter(r=>!r.ok).map(r=>r.q.id),title:'Retry'});}
+  show();
+}
+
+function secFilter(el,keys,onPick){const box=document.createElement('div');box.className='secfilter';box.innerHTML=`<button class="btn sm pri" data-f="all">All</button>`+keys.map(k=>`<button class="btn sm" data-f="${k}">§${TOPICS[k].sec}</button>`).join('');el.appendChild(box);box.querySelectorAll('button').forEach(b=>b.onclick=()=>{box.querySelectorAll('button').forEach(x=>x.classList.toggle('pri',x===b));onPick(b.dataset.f);});}
+
+function steps(el){
+  el.innerHTML=`<h2>Worked steps</h2><p class="lede">Every example from your notes. Try it on paper first, take the hint if you're stuck, then reveal the steps one at a time and compare. A yellow <span class="chip fix">Note fix</span> marks a place where your notes had a slip.</p>`;
+  const pl=document.createElement('div');pl.className='view';
+  secFilter(el,[...new Set(W.map(w=>w.t))],f=>draw(f));el.appendChild(pl);
+  function draw(f){
+    pl.innerHTML=W.map((p,i)=>({p,i})).filter(o=>f==='all'||o.p.t===f).map(({p,i})=>`<div class="card prob" data-i="${i}"><div class="row"><span class="chip">§${TOPICS[p.t].sec}</span><span class="mono muted">${p.ex}</span>${p.note?'<span class="chip fix">Note fix</span>':''}</div>
+      <div class="qtext">${p.q}</div><ol class="steps"></ol>
+      <div class="row"><button class="btn" data-a="hint">Hint</button><button class="btn pri" data-a="next">Next step</button><button class="btn ghost" data-a="all">Full solution</button></div></div>`).join('');
+    pl.querySelectorAll('.prob').forEach(card=>{const p=W[+card.dataset.i];const ol=card.querySelector('.steps');let n=0,hinted=false;
+      const add=(h,c)=>{const li=document.createElement('li');if(c)li.className=c;li.innerHTML='<div>'+h+'</div>';ol.appendChild(li);tex(li);};
+      const end=()=>{card.querySelector('[data-a=next]').disabled=true;card.querySelector('[data-a=all]').disabled=true;add('<span class="ans">Answer: '+p.ans+'</span>');if(p.note)add(p.note,'note');};
+      card.querySelector('[data-a=hint]').onclick=e=>{if(hinted)return;hinted=true;e.target.disabled=true;ol.insertAdjacentHTML('afterbegin','<li class="hint"><div>'+p.hint+'</div></li>');tex(ol.firstChild);};
+      card.querySelector('[data-a=next]').onclick=()=>{if(n<p.steps.length){add(p.steps[n++]);if(n===p.steps.length)end();}};
+      card.querySelector('[data-a=all]').onclick=()=>{while(n<p.steps.length)add(p.steps[n++]);end();};});
+    tex(pl);
+  }
+  draw('all');
+}
+
+function nextstep(el){
+  el.innerHTML=`<h2>Next step?</h2><p class="lede">Exams reward knowing <i>which move to make</i>. At each stage, pick what comes next. A wrong pick explains itself and lets you try again.</p><div class="view" id="nl"></div>`;
+  const nl=$('#nl');
+  nl.innerHTML=NS.map((s,i)=>`<div class="card prob" data-i="${i}"><div class="row"><span class="chip">§${TOPICS[s.t].sec}</span><span class="mono muted">${s.st.length} stages</span></div><div class="qtext">${s.q}</div><div class="stages view"></div></div>`).join('');
+  nl.querySelectorAll('.prob').forEach(card=>{const s=NS[+card.dataset.i];const box=card.querySelector('.stages');let k=0;
+    function stage(){const st=s.st[k];const d=document.createElement('div');d.className='stage';
+      const ord=shuffle(st.o.map((_,j)=>j));
+      d.innerHTML=`<b>${k+1}. ${st.p}</b><div class="opts">${ord.map(j=>`<button class="opt" data-j="${j}"><span class="t">${st.o[j]}</span></button>`).join('')}</div><div class="fbx"></div>`;
+      box.appendChild(d);tex(d);
+      d.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const j=+b.dataset.j;const fb=d.querySelector('.fbx');
+        if(j===st.a){d.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add('ok');fb.innerHTML=`<div class="fb ok"><div>${st.why}</div></div>`;tex(fb);k++;
+          if(k<s.st.length)stage();else{const e=document.createElement('div');e.className='done-line';e.textContent='✓ Solved: every move was right.';box.appendChild(e);}}
+        else{b.classList.add('bad');b.disabled=true;fb.innerHTML=`<div class="fb bad"><div>Not this one. ${st.why}</div></div>`;tex(fb);}});}
+    stage();});
+}
+
+function speed(el){
+  const pool=QB.filter(q=>q.lv===1||q.type==='tf');
+  el.innerHTML=`<h2>Speed round</h2><p class="lede">60 seconds. Answer as many as you can. A correct answer scores a point; a wrong one shows the right answer and moves on. Your best: <b class="mono">${best}</b>.</p>
+   <div class="card row" style="justify-content:space-between"><div><b>${pool.length} quick questions</b><p class="muted" style="font-size:.88rem">Easy and true/false questions from every section</p></div><button class="btn pri" id="go">Start</button></div><div id="sb"></div>`;
+  $('#go').onclick=()=>{const list=shuffle(pool);let i=0,score=0,left=60,miss=[];
+    el.innerHTML=`<div class="qhead"><h2>Speed round</h2><div class="row"><span class="timer" id="tmr">01:00</span><span class="mono">Score <b id="sc">0</b></span></div></div><div id="qbox"></div>`;
+    const tm=$('#tmr');timerId=setInterval(()=>{left--;tm.textContent='00:'+String(Math.max(left,0)).padStart(2,'0');tm.classList.toggle('low',left<=10);if(left<=0){clearTimer();end();}},1000);
+    function show(){const q=list[i%list.length];const order=q.type==='tf'?[0,1]:shuffle(q.o.map((_,k)=>k));const box=$('#qbox');box.innerHTML=qCard(q,order);
+      box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const k=+b.dataset.k,ok=k===q.a;box.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(+x.dataset.k===q.a)x.classList.add('ok');else if(+x.dataset.k===k)x.classList.add('bad');});
+        record(q,ok);if(ok){score++;$('#sc').textContent=score;}else miss.push(q);i++;setTimeout(()=>{if(timerId)show();},ok?350:1100);});tex(box);}
+    function end(){if(score>best){best=score;save();}el.innerHTML=`<div class="card result"><span class="big">${score}</span><h2>${score>=best&&score>0?'New best!':'Time!'}</h2><p class="muted">Best: ${best}</p>
+      ${miss.length?`<div class="breakdown"><b>Missed:</b>${miss.map(q=>`<div class="card" style="padding:10px"><div>${q.q}</div><div class="muted" style="font-size:.9rem">Answer: ${q.o[q.a]}: ${q.e}</div></div>`).join('')}</div>`:''}
+      <div class="row" style="justify-content:center"><button class="btn pri" id="again">Play again</button><a class="btn" href="#home">Home</a></div></div>`;$('#again').onclick=()=>route();tex(el);}
+    show();};
+}
+
+function match(el){
+  let set='Derivatives';
+  el.innerHTML=`<h2>Match</h2><p class="lede">Tap an item on the left, then its partner on the right. Clear the board with as few misses as possible.</p>
+  <div class="row"><div class="secfilter" id="ms">${Object.keys(MATCH).map((k,i)=>`<button class="btn sm ${i?'':'pri'}" data-s="${k}">${k}</button>`).join('')}</div><button class="btn sm ghost" id="nw">New board</button><span class="mono muted" id="mm"></span></div><div id="mb"></div>`;
+  el.querySelectorAll('#ms button').forEach(b=>b.onclick=()=>{set=b.dataset.s;el.querySelectorAll('#ms button').forEach(x=>x.classList.toggle('pri',x===b));board();});
+  $('#nw').onclick=()=>board();
+  function board(){const pairs=shuffle(MATCH[set]).slice(0,5);let sel=null,miss=0,done=0;
+    const L=pairs.map((p,i)=>({i,h:p[0]})),Rr=shuffle(pairs.map((p,i)=>({i,h:p[1]})));
+    const mb=$('#mb');mb.innerHTML=`<div class="match"><div class="col">${L.map(x=>`<button class="tile" data-side="L" data-i="${x.i}">${x.h}</button>`).join('')}</div><div class="col">${Rr.map(x=>`<button class="tile" data-side="R" data-i="${x.i}">${x.h}</button>`).join('')}</div></div>`;
+    $('#mm').textContent='Misses: 0';
+    mb.querySelectorAll('.tile').forEach(t=>t.onclick=()=>{if(t.classList.contains('done'))return;
+      if(t.dataset.side==='L'){mb.querySelectorAll('[data-side=L]').forEach(x=>x.classList.remove('sel'));t.classList.add('sel');sel=t;return;}
+      if(!sel)return;
+      if(sel.dataset.i===t.dataset.i){sel.classList.remove('sel');sel.classList.add('done');t.classList.add('done');sel.disabled=t.disabled=true;sel=null;done++;
+        if(done===pairs.length){$('#mm').textContent=miss?`Cleared with ${miss} miss${miss>1?'es':''}`:'Perfect board ✓';}}
+      else{miss++;$('#mm').textContent='Misses: '+miss;t.classList.remove('no');void t.offsetWidth;t.classList.add('no');}});
+    tex(mb);}
+  board();
+}
+
+function exam(el){
+  el.innerHTML=`<h2>Mock exam</h2><p class="lede">15 mixed questions from every section in 25 minutes. Feedback is instant, and at the end you get a report on which sections need work.</p>
+  <div class="card row" style="justify-content:space-between"><div><b>15 questions · 25 minutes</b><p class="muted" style="font-size:.88rem">At least one from each section, more from the big ones</p></div><button class="btn pri" id="go">Start exam</button></div>`;
+  $('#go').onclick=()=>{let pick=[];Object.keys(TOPICS).forEach(k=>pick.push(shuffle(tq(k))[0]));pick.push(...shuffle(QB.filter(q=>!pick.includes(q)&&q.lv>1)).slice(0,5));el.innerHTML='';runSession(el,shuffle(pick),{title:'Mock exam',timer:25*60});};
+}
+
+function spot(el){
+  el.innerHTML=`<h2>Spot the mistake</h2><p class="lede">Each solution has exactly one wrong step. Tap it. Some come straight from slips in your own notes, so you'll know to watch for them.</p><div class="view" id="sl"></div>`;
+  const sl=$('#sl');
+  sl.innerHTML=SPOT.map((s,i)=>`<div class="card prob" data-i="${i}"><div class="row"><span class="chip">§${TOPICS[s.t].sec}</span><span class="chip ${s.src.startsWith('From')?'fix':''}">${s.src}</span></div><div class="qtext">${s.title}</div><ol class="steps spot">${s.steps.map((x,k)=>`<li tabindex="0" data-k="${k}"><div>${x}</div></li>`).join('')}</ol><div class="fbx"></div></div>`).join('');
+  sl.querySelectorAll('.prob').forEach(card=>{const s=SPOT[+card.dataset.i];const ol=card.querySelector('.steps');const fbx=card.querySelector('.fbx');let tries=0;
+    const pick=li=>{if(ol.classList.contains('done'))return;const k=+li.dataset.k;tries++;
+      if(k===s.bad){li.classList.add('ok');ol.classList.add('done');fbx.innerHTML=`<div class="fb ok"><h4>${tries===1?'First try ✓':'Found it ✓'}</h4><div><span class="lbl">Fix: </span>${s.fix}</div></div>`;}
+      else{li.classList.add('bad');fbx.innerHTML=`<div class="fb bad"><h4>That step is fine</h4><div>Look again. ${tries>=2?'Hint: it\'s step '+(s.bad+1)+'.':''}</div></div>`;}tex(fbx);};
+    ol.querySelectorAll('li').forEach(li=>{li.onclick=()=>pick(li);li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(li);}};});});
+}
+
+function cards(el){
+  let deck=CARDS.slice(),i=0;
+  el.innerHTML=`<h2>Flashcards</h2><p class="lede">Read the front and say the answer out loud before you flip. Recalling beats re-reading.</p>
+  <div class="flash" id="fl" tabindex="0" role="button" aria-label="Flip card"><div class="inner"><div class="face front"><span class="chip tag" id="ft"></span><p id="ff"></p><span class="muted" style="font-size:.8rem">Tap to flip</span></div><div class="face back"><p id="fbk"></p></div></div></div>
+  <div class="row" style="justify-content:space-between"><div class="row"><button class="btn" id="pv">← Prev</button><button class="btn pri" id="nx2">Next →</button></div><div class="row"><span class="mono muted" id="fc"></span><button class="btn ghost" id="sh">Shuffle</button></div></div>`;
+  const fl=$('#fl');const draw=()=>{fl.classList.remove('flip');const [t,a,b]=deck[i];$('#ft').textContent='§'+TOPICS[t].sec;$('#ff').innerHTML=a;$('#fbk').innerHTML=b;$('#fc').textContent=(i+1)+' / '+deck.length;tex(fl);};
+  fl.onclick=()=>fl.classList.toggle('flip');fl.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fl.classList.toggle('flip');}};
+  $('#nx2').onclick=()=>{i=(i+1)%deck.length;draw();};$('#pv').onclick=()=>{i=(i-1+deck.length)%deck.length;draw();};$('#sh').onclick=()=>{deck=shuffle(deck);i=0;draw();};draw();
+}
+
+function sheet(el){
+  const missBy={};[...wrongs].forEach(id=>{const q=QBY[id];if(q)missBy[q.t]=(missBy[q.t]||0)+1;});
+  const order=Object.keys(RULES).sort((a,b)=>(missBy[b]||0)-(missBy[a]||0));
+  const any=Object.keys(missBy).length;
+  el.innerHTML=`<h2>Night-before sheet</h2><p class="lede">${any?'Sections where you have mistakes are at the top and already open. Read those first.':'Every rule in one place. Once you start quizzing, the sections you miss will move to the top automatically.'}</p>
+  <div class="rules">${order.map(k=>`<details ${missBy[k]||(!any&&k==='s11')?'open':''}><summary><span>§${TOPICS[k].sec} ${TOPICS[k].n}</span>${missBy[k]?`<span class="miss">${missBy[k]} missed</span>`:''}</summary><ul>${RULES[k].map(x=>`<li>${x}</li>`).join('')}</ul><div class="row" style="padding-bottom:14px"><button class="btn sm" data-t="${k}">Quiz §${TOPICS[k].sec}</button>${missBy[k]?`<button class="btn sm pri" data-m="${k}">Redo my ${missBy[k]} mistake${missBy[k]>1?'s':''}</button>`:''}</div></details>`).join('')}</div>`;
+  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>startQuiz({t:b.dataset.t}));
+  el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>startQuiz({ids:[...wrongs].filter(id=>QBY[id]&&QBY[id].t===b.dataset.m),title:'My mistakes §'+TOPICS[b.dataset.m].sec}));
+}
+
+function mistakes(el){
+  const list=[...wrongs].map(i=>QBY[i]).filter(Boolean);
+  if(!list.length){el.innerHTML=`<h2>My mistakes</h2><div class="card empty"><h3>Nothing here yet</h3><p class="muted">Any question you miss lands here automatically, and leaves once you get it right.</p><a class="btn pri" href="#quiz">Start a quiz</a></div>`;return;}
+  el.innerHTML=`<h2>My mistakes</h2><p class="lede">${list.length} question${list.length>1?'s':''} to fix. Your mistakes are your best study guide.</p>
+  <div class="row"><button class="btn pri" id="redo">Redo them all</button><button class="btn ghost" id="clr">Clear list</button></div>
+  ${Object.keys(TOPICS).filter(k=>list.some(q=>q.t===k)).map(k=>`<div class="card"><h3 style="margin-bottom:10px">§${TOPICS[k].sec} ${TOPICS[k].n} <span class="mono muted">(${list.filter(q=>q.t===k).length})</span></h3><ol class="steps">${list.filter(q=>q.t===k).map(q=>`<li><div>${q.q}</div></li>`).join('')}</ol></div>`).join('')}`;
+  $('#redo').onclick=()=>startQuiz({ids:list.map(q=>q.id),title:'My mistakes'});
+  const clr=$('#clr');let armed=false;clr.onclick=()=>{if(!armed){armed=true;clr.textContent='Tap again to confirm';return;}wrongs.clear();save();route();};
+}
+
+function ideas(el){
+  el.innerHTML=`<h2>Study ideas</h2><p class="lede">Techniques that make study time stick, plus two tools you can use right here.</p>
+  <div class="card tree"><h3>Limit solver guide</h3><p class="muted" style="font-size:.9rem">Not sure where to start? Answer the questions and it points you to the method.</p><div id="tb"></div></div>
+  <div class="ideas">
+   <div class="card idea"><span class="n">PRE-TEST</span><h3>Quiz before you read</h3><p>Do the Easy level of a section before opening its notes. The misses tell you exactly what to read.</p></div>
+   <div class="card idea"><span class="n">BLURTING</span><h3>Empty your head</h3><p>Close everything and write every rule you remember for one section in 3 minutes. Then compare with the night-before sheet and fill the gaps in a different colour.</p></div>
+   <div class="card idea"><span class="n">TEACH IT</span><h3>The Feynman test</h3><p>Explain out loud why \\(\\frac00\\) isn't 0, or why \\(\\sqrt{x^2}=-x\\) at \\(-\\infty\\). Where you stumble is what to review.</p></div>
+   <div class="card idea"><span class="n">ERROR TAGS</span><h3>Label each mistake</h3><p>Tag every miss: "sign", "constant", "conjugate", "one-sided". After a day you'll see 3 or 4 tags repeat. Those are your real weak spots.</p></div>
+   <div class="card idea"><span class="n">COVER & COPY</span><h3>Redo the examples cold</h3><p>Cover a worked example, solve it, then reveal the steps. If you match every step twice in a row, move on.</p></div>
+   <div class="card idea"><span class="n">BE THE PROF</span><h3>Write a trap question</h3><p>For each rule, write one True/False that a tired student would get wrong (like "\\(\\frac{d}{dx}[\\pi]=1\\)"). Spotting traps keeps you out of them.</p></div>
+   <div class="card idea"><span class="n">1 – 3 – 7</span><h3>Spaced review</h3><p>Flashcards today, again in 3 days, and again in a week. Short and spaced beats one long session.</p></div>
+   <div class="card idea"><span class="n">INTERLEAVE</span><h3>Mix the sections</h3><p>The exam won't tell you "this is a conjugate question". Use the mock exam and speed round to practise choosing the method.</p></div>
+  </div>
+  <div class="card"><h3 style="margin-bottom:10px">Pomodoro timer</h3><div class="pomo"><span class="time" id="pt">25:00</span><div class="row"><button class="btn pri" id="ps">Start</button><button class="btn" id="pr">Reset</button><button class="btn ghost" id="pm">Focus 25</button></div><span class="muted" style="font-size:.88rem" id="pmsg">25 minutes of focus (phone away), then a 5-minute break.</span></div></div>
+  <div class="card"><h3 style="margin-bottom:10px">5-day plan</h3><ol class="plan">
+   <li><b>Day 1</b><span>§1.1 – 1.2: worked steps, then quiz Easy → Medium. Tag your errors.</span></li>
+   <li><b>Day 2</b><span>§1.3 – 1.4: rational and radical limits at ∞, and the two ε–δ proofs. "Next step?" for 1.3.</span></li>
+   <li><b>Day 3</b><span>§1.5 – 1.6: continuity conditions, squeeze with |x|. Spot the mistake.</span></li>
+   <li><b>Day 4</b><span>§2.1 – 2.5: tangent lines, then the rules. Match board (Derivatives) until it's perfect.</span></li>
+   <li><b>Day 5</b><span>Two mock exams with My mistakes in between, then the night-before sheet. Sleep early.</span></li></ol></div>`;
+  const T={s:{q:'Where is x going?',o:[['To a number a','sub'],['To ±∞','inf']]},
+   sub:{q:'Substitute x = a. What do you get?',o:[['A normal number','num'],[R`\(\frac k0\) with \(k\neq0\)`,'k0'],[R`\(\frac00\)`,'zz'],['f is piecewise and a is a break point','pw']]},
+   num:{end:'Done. That number is the limit (limit laws, Ex 5–7 of §1.2).'},
+   k0:{end:R`It's \(\pm\infty\) or DNE. Make a sign chart: test a number just left and just right of \(a\) (Ex 8 of §1.2).`},
+   pw:{end:'Left limit from the left piece, right limit from the right piece. Equal → that\'s the limit; different → DNE (Ex 11 of §1.2).'},
+   zz:{q:R`\(\frac00\). What does it look like?`,o:[['Polynomials','fac'],['Has a square root','conj'],['Has sin / cos / tan','trg'],['Has sin(1/x) or cos(1/x)','sq'],[R`Has \(|x|\)`,'abs']]},
+   fac:{end:R`Factor and cancel \((x-a)\), then substitute (Ex 9 of §1.2).`},conj:{end:R`Multiply by the conjugate, cancel, substitute (Ex 10 of §1.2).`},
+   trg:{end:R`Build \(\frac{\sin u}{u}\to1\): multiply and divide to match angles. \(\tan x=\frac{\sin x}{\cos x}\) (Ex 2 of §1.6).`},
+   sq:{end:R`Squeeze: \(-|x|^n\le x^n\sin(\cdot)\le|x|^n\) (§1.6).`},abs:{end:R`Split: \(|x|=x\) on the right, \(-x\) on the left (Ex 4 of §1.1).`},
+   inf:{q:'What does it look like?',o:[['Polynomial','poly'],['Rational function','rat'],[R`Root minus something (\(\infty-\infty\))`,'c2'],[R`Root over polynomial`,'root'],[R`\((1+\frac1x)^x\) type`,'e']]},
+   poly:{end:'Keep the highest-degree term; watch odd/even powers at −∞ (Ex 5–6 of §1.3).'},rat:{end:'Divide by the highest power in the denominator, or use the quick method (Ex 7–9 of §1.3).'},
+   c2:{end:R`Multiply by the conjugate, then divide by the highest power (Ex 11 of §1.3).`},root:{end:R`Pull \(x^2\) out: \(\sqrt{x^2}=|x|\), which is \(x\) at \(+\infty\) and \(-x\) at \(-\infty\) (Ex 10 of §1.3).`},e:{end:R`Use \((1+\frac1x)^x\to e\); adjust exponents like \((\ldots)^{2x\cdot\frac12}\) (Ex 3–4 of §1.3).`}};
+  const path=[];const tb=$('#tb');
+  function node(id){const n=T[id];tb.innerHTML=`${path.length?`<div class="crumbs">${path.map(p=>`<span>${p}</span>`).join('')}</div>`:''}${n.end?`<div class="end">${n.end}</div>`:`<p><b>${n.q}</b></p><div class="row">${n.o.map((o,k)=>`<button class="btn" data-k="${k}">${o[0]}</button>`).join('')}</div>`}${path.length?'<div class="row"><button class="btn ghost" id="rs">Start over</button></div>':''}`;
+    if(!n.end)tb.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const o=n.o[+b.dataset.k];path.push(o[0]);node(o[1]);});const rs=tb.querySelector('#rs');if(rs)rs.onclick=()=>{path.length=0;node('s');};tex(tb);}
+  node('s');
+  let focus=true,left=25*60,run=false;const pt=$('#pt'),ps=$('#ps');
+  const fmt=()=>{pt.textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');};
+  const setMode=f=>{focus=f;left=(f?25:5)*60;$('#pm').textContent=f?'Focus 25':'Break 5';$('#pmsg').textContent=f?'25 minutes of focus (phone away), then a 5-minute break.':'Break: stand up, drink water, stay off the phone.';fmt();};
+  ps.onclick=()=>{run=!run;ps.textContent=run?'Pause':'Resume';if(run){timerId=setInterval(()=>{left--;if(left<=0){clearTimer();run=false;ps.textContent='Start';setMode(!focus);return;}fmt();},1000);}else clearTimer();};
+  $('#pr').onclick=()=>{clearTimer();run=false;ps.textContent='Start';setMode(focus);};$('#pm').onclick=()=>{clearTimer();run=false;ps.textContent='Start';setMode(!focus);};
+}
+
+refreshHeader(); route();
+</script>
+
+</body>
+</html>
